@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,17 +16,18 @@
         <span class="brand-icon d-flex align-items-center justify-content-center">NV</span>
         <div>
           <div class="fw-bold text-dark">NUMA VIETNAM TRAVEL</div>
-          <small class="text-muted">Hành trình Việt Nam</small>
+          <small class="text-muted">Vietnam Journey</small>
         </div>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Open menu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav mx-auto mb-3 mb-md-0">
-          <li class="nav-item"><a class="nav-link active" href="#">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="tourDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Tour
@@ -40,19 +41,22 @@
               <li><a class="dropdown-item" href="#">Tour 3</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#">Điểm đến</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="#">Destinations</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
         </ul>
+
         <div class="d-flex gap-2">
-          <button type="button" class="icon-btn" aria-label="Tìm kiếm">
+          <button type="button" class="icon-btn" aria-label="Search">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="7"></circle>
               <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
             </svg>
           </button>
-          <button type="button" class="icon-btn" aria-label="Gọi điện">
+
+          <button type="button" class="icon-btn" aria-label="Call">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72 12.13 12.13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l1.45-1.45a2 2 0 0 1 2.11-.45 12.13 12.13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
