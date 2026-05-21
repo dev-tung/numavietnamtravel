@@ -23,17 +23,38 @@
       </button>
 
       <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto mb-3 mb-md-0">
+        <ul class="navbar-nav mx-auto mb-3 mb-md-0">
           <li class="nav-item"><a class="nav-link active" href="#">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Tour</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="tourDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tour
+              <svg class="dropdown-icon ms-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="tourDropdown">
+              <li><a class="dropdown-item" href="#">Tour 1</a></li>
+              <li><a class="dropdown-item" href="#">Tour 2</a></li>
+              <li><a class="dropdown-item" href="#">Tour 3</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#">Điểm đến</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
         </ul>
         <div class="d-flex gap-2">
-          <button type="button" class="btn btn-outline-secondary">🔍</button>
-          <button type="button" class="btn btn-outline-secondary">📞</button>
+          <button type="button" class="icon-btn" aria-label="Tìm kiếm">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Gọi điện">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72 12.13 12.13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 10.09a16 16 0 0 0 6 6l1.45-1.45a2 2 0 0 1 2.11-.45 12.13 12.13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -130,9 +151,9 @@
 
         <div class="col-12 col-md-6 col-xl-4">
           <article class="card border-0 shadow-sm h-100">
-            <img src="https://images.unsplash.com/photo-1519817650390-64a93db5118d?auto=format&fit=crop&w=1200&q=80" class="card-img-top rounded-top" alt="Tour Nha Trang - Bình Ba" />
+            <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1200&q=80" class="card-img-top rounded-top" alt="Tour Nha Trang - Ba Đình" />
             <div class="card-body">
-              <h5 class="card-title">Tour Nha Trang - Bình Ba</h5>
+              <h5 class="card-title">Tour Nha Trang - Ba Đình</h5>
               <p class="card-text text-muted">3N2Đ trải nghiệm biển đảo và đảo nhỏ.</p>
               <div class="d-flex flex-wrap gap-2 text-muted small">
                 <span>3 ngày 2 đêm</span>
@@ -187,6 +208,12 @@
             <h6 class="mb-0">Phú Quốc</h6>
           </div>
         </div>
+        <div class="col-6 col-md-4 col-xl-2">
+          <div class="destination-card rounded-4 bg-white shadow-sm p-3 text-center h-100">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" class="img-fluid rounded-4 mb-3" alt="Sapa" />
+            <h6 class="mb-0">Sapa</h6>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -201,7 +228,7 @@
       <div class="row g-4">
         <div class="col-12 col-md-6 col-xl-4">
           <article class="card border-0 shadow-sm h-100 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1200&q=80" class="card-img-top" alt="Blog Hạ Long" />
+            <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1200&q=80" class="card-img-top blog-image" alt="Blog Hạ Long" />
             <div class="card-body p-4">
               <small class="text-muted">20/05/2024</small>
               <h5>Du lịch Hạ Long tự túc</h5>
@@ -214,7 +241,7 @@
         </div>
         <div class="col-12 col-md-6 col-xl-4">
           <article class="card border-0 shadow-sm h-100 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" class="card-img-top" alt="Blog biển" />
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" class="card-img-top blog-image" alt="Blog biển" />
             <div class="card-body p-4">
               <small class="text-muted">15/05/2024</small>
               <h5>Top 10 bãi biển đẹp nhất Việt Nam</h5>
@@ -227,7 +254,7 @@
         </div>
         <div class="col-12 col-md-6 col-xl-4">
           <article class="card border-0 shadow-sm h-100 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1526779259212-673aa2aa1c5b?auto=format&fit=crop&w=1200&q=80" class="card-img-top" alt="Blog Đà Lạt" />
+            <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&w=1200&q=80" class="card-img-top blog-image" alt="Blog Đà Lạt" />
             <div class="card-body p-4">
               <small class="text-muted">10/05/2024</small>
               <h5>Du lịch Đà Lạt mùa nào đẹp nhất?</h5>
