@@ -2,17 +2,17 @@
 
 <main class="py-5 bg-light">
 
-  <div class="container bg-white rounded-4 shadow-sm p-4 p-lg-5">
+  <div class="container bg-white rounded-1 shadow-sm p-4 p-lg-5">
 
     <!-- Breadcrumb -->
     <nav class="mb-3 small text-muted">
       <a href="#" class="text-decoration-none text-muted">
-        Home
+        Trang chủ
       </a>
 
       <span class="mx-2">›</span>
 
-      <span>Tours</span>
+      <span>Tour</span>
     </nav>
 
     <!-- Heading -->
@@ -21,22 +21,22 @@
       <div>
 
         <h1 class="fw-bold mb-2">
-          Tour List
+          Danh sách tour
         </h1>
 
         <p class="text-muted mb-0">
-          Discover amazing travel tours designed just for you
+          Khám phá các tour du lịch hấp dẫn được thiết kế riêng cho bạn
         </p>
 
       </div>
 
       <div>
 
-        <select class="form-select rounded-3 shadow-sm">
-          <option>Sort by: Latest</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Featured Tours</option>
+        <select class="form-select rounded-1 shadow-sm">
+          <option>Sắp xếp: Mới nhất</option>
+          <option>Giá tăng dần</option>
+          <option>Giá giảm dần</option>
+          <option>Tour nổi bật</option>
         </select>
 
       </div>
@@ -49,24 +49,24 @@
       <!-- Sidebar -->
       <div class="col-12 col-lg-3">
 
-        <div class="border rounded-4 p-4 h-100">
+        <div class="border rounded-1 p-4 h-100">
 
           <h5 class="fw-bold mb-4">
-            SEARCH FILTERS
+            BỘ LỌC TÌM KIẾM
           </h5>
 
           <!-- Search -->
           <div class="mb-4">
 
             <label class="form-label fw-semibold small">
-              Search
+              Tìm kiếm
             </label>
 
             <div class="input-group">
 
               <input type="text"
                      class="form-control border-end-0 rounded-start-3"
-                     placeholder="Enter tour name or destination...">
+                     placeholder="Nhập tên tour, điểm đến...">
 
               <span class="input-group-text bg-white border-start-0 rounded-end-3">
 
@@ -91,11 +91,11 @@
 
           </div>
 
-          <!-- Categories -->
+          <!-- Category -->
           <div class="mb-4">
 
             <label class="form-label fw-semibold small">
-              Tour Categories
+              Danh mục tour
             </label>
 
             <div class="d-flex flex-column gap-3 small">
@@ -103,28 +103,28 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour1">
                 <label class="form-check-label" for="tour1">
-                  Group Tours
+                  Tour ghép đoàn
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour2">
                 <label class="form-check-label" for="tour2">
-                  Private Tours
+                  Tour riêng
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour3">
                 <label class="form-check-label" for="tour3">
-                  Domestic Tours
+                  Tour trong nước
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour4">
                 <label class="form-check-label" for="tour4">
-                  International Tours
+                  Tour nước ngoài
                 </label>
               </div>
 
@@ -132,8 +132,8 @@
 
           </div>
 
-          <button class="btn btn-dark w-100 rounded-3">
-            Clear Filters
+          <button class="btn btn-dark w-100 rounded-1">
+            Xóa bộ lọc
           </button>
 
         </div>
@@ -145,7 +145,7 @@
 
         <div class="mb-4">
           <p class="text-muted small mb-0">
-            Showing 1 - 5 of 24 tours
+            Hiển thị 1 - 5 trong tổng số 24 tour
           </p>
         </div>
 
@@ -154,7 +154,7 @@
 
           <?php for($i = 1; $i <= 5; $i++) : ?>
 
-          <article class="card border shadow-sm rounded-4 overflow-hidden h-100">
+          <article class="card border shadow-sm rounded-1 overflow-hidden h-100">
 
             <div class="row g-0 h-100">
 
@@ -162,7 +162,7 @@
               <div class="col-md-4 position-relative">
 
                 <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
-                  Featured
+                  Nổi bật
                 </span>
 
                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
@@ -179,7 +179,7 @@
                   <div>
 
                     <h3 class="h4 fw-bold mb-3">
-                      Tour <?= $i ?>: Hanoi – Ha Long – Ninh Binh 3D2N
+                      Tour <?= $i ?>: Hà Nội – Hạ Long – Ninh Bình 3N2Đ
                     </h3>
 
                     <!-- Meta -->
@@ -199,7 +199,7 @@
 
                         </svg>
 
-                        3 Days 2 Nights
+                        3 ngày 2 đêm
 
                       </span>
 
@@ -217,16 +217,15 @@
 
                         </svg>
 
-                        Departure: Daily
+                        Khởi hành: Hàng ngày
 
                       </span>
 
                     </div>
 
                     <p class="text-muted mb-4">
-                      Explore the breathtaking beauty of Ha Long Bay,
-                      the ancient capital Hoa Lu in Ninh Binh,
-                      and the rich culture of Northern Vietnam.
+                      Khám phá vẻ đẹp thiên nhiên kỳ vĩ của Hạ Long,
+                      cố đô Hoa Lư Ninh Bình và những nét văn hóa đặc sắc miền Bắc.
                     </p>
 
                     <!-- Features -->
@@ -246,7 +245,7 @@
 
                         </svg>
 
-                        Tourist Bus
+                        Xe du lịch
 
                       </span>
 
@@ -263,7 +262,7 @@
 
                         </svg>
 
-                        3-4 Star Hotel
+                        Khách sạn 3-4 sao
 
                       </span>
 
@@ -281,7 +280,7 @@
 
                         </svg>
 
-                        Meals Included
+                        Ăn uống
 
                       </span>
 
@@ -293,12 +292,12 @@
                   <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
 
                     <div class="fw-bold fs-3">
-                      2,990,000 VND
+                      2.990.000 VND
                     </div>
 
                     <a href="#"
-                       class="btn btn-outline-primary rounded-3 px-4">
-                      View Details
+                       class="btn btn-outline-primary rounded-1 px-4">
+                      Xem chi tiết
                     </a>
 
                   </div>
@@ -321,23 +320,23 @@
           <ul class="pagination justify-content-center">
 
             <li class="page-item">
-              <a class="page-link rounded-3 mx-1" href="#">‹</a>
+              <a class="page-link rounded-1 mx-1" href="#">‹</a>
             </li>
 
             <li class="page-item active">
-              <a class="page-link rounded-3 mx-1" href="#">1</a>
+              <a class="page-link rounded-1 mx-1" href="#">1</a>
             </li>
 
             <li class="page-item">
-              <a class="page-link rounded-3 mx-1" href="#">2</a>
+              <a class="page-link rounded-1 mx-1" href="#">2</a>
             </li>
 
             <li class="page-item">
-              <a class="page-link rounded-3 mx-1" href="#">3</a>
+              <a class="page-link rounded-1 mx-1" href="#">3</a>
             </li>
 
             <li class="page-item">
-              <a class="page-link rounded-3 mx-1" href="#">›</a>
+              <a class="page-link rounded-1 mx-1" href="#">›</a>
             </li>
 
           </ul>
