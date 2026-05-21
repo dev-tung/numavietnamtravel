@@ -1,11 +1,40 @@
 # BEGIN WordPress
 
+<IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
+
+# Redirect index.php
 RewriteRule ^index\.php$ - [L]
+
+# WordPress rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 
+</IfModule>
+
 # END WordPress
+
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect wp-config.php
+<Files wp-config.php>
+order allow,deny
+deny from all
+</Files>
+
+# Protect .htaccess
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+# Increase upload limits
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
