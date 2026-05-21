@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
-<main class="py-5 bg-light">
+<main class="container p-3">
 
-  <div class="container bg-white rounded-1 shadow-sm p-4 p-lg-5">
+  <div class="bg-white rounded-1 shadow-sm p-4">
 
     <!-- Breadcrumb -->
     <nav class="mb-3 small text-muted">

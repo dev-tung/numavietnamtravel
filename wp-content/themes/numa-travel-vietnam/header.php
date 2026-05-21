@@ -11,7 +11,7 @@
 </head>
 <body>
   <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
-    <div class="container container px-4">
+    <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-3" href="#">
         <span class="brand-icon d-flex align-items-center justify-content-center">NV</span>
         <div>

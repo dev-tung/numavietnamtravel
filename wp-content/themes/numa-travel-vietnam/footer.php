@@ -1,7 +1,6 @@
   <footer class="bg-white py-5 border-top">
-    <div class="container-fluid px-0">
       <div class="container px-4">
-        <div class="row gy-4 gx-4 justify-content-between">
+        <div class="row justify-content-between">
 
           <div class="col-12 col-md-6 col-xl-3 ps-0">
             <h5>NUMA VIETNAM TRAVEL</h5>
@@ -48,7 +47,6 @@
           © 2024 Numa Vietnam Travel. All rights reserved.
         </div>
       </div>
-    </div>
   </footer>
 
   <script src="<?php echo get_template_directory_uri(); ?>/assets/js/bootstrap.bundle.min.js"></script>
