@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Numa Vietnam Travel - Bootstrap Wireframe</title>
-  <link href="./bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="wireframe-homepage-bootstrap.css" />
+  <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/main.css">
 </head>
 <body>
   <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
@@ -314,6 +314,6 @@
     </div>
   </footer>
 
-  <script src="./bootstrap.bundle.min.js"></script>
+  <script src="<?php echo get_template_directory_uri(); ?>/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
