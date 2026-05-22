@@ -758,8 +758,11 @@ MODAL GALLERY
 
           <div class="d-grid gap-3">
 
-            <a href="#" class="btn btn-dark rounded-1 py-3">
+            <a href="<?php echo esc_url(home_url('/?add-to-cart=15')); ?>"
+              class="btn btn-dark rounded-1 py-3 w-100">
+
               Book Now
+
             </a>
 
             <a href="#" class="btn btn-outline-dark rounded-1 py-3">
