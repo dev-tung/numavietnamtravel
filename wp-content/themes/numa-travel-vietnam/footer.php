@@ -27,15 +27,14 @@
             </ul>
           </div>
 
-          <div class="col-12 col-md-6 col-xl-auto">
+          <div class="col-12 col-md-6 col-xl-2">
             <h6>Contact</h6>
             <p class="text-muted mb-1">1900 1234</p>
-            <p class="text-muted mb-1">info@numavietnamtravel.com</p>
+            <p class="text-muted mb-1">viethung1588@gmail.com</p>
             <p class="text-muted mb-0">123 Le Loi Street, District 1, Ho Chi Minh City</p>
           </div>
 
           <div class="col-12 col-md-6 col-xl-auto pe-0">
-            <h6>Map</h6>
             <div class="footer-map rounded-4 overflow-hidden border border-1 border-muted">
               <iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=106.6900%2C10.7760%2C106.7080%2C10.7830&layer=mapnik&marker=10.7795%2C106.6990" title="Numa Vietnam Travel Map" loading="lazy"></iframe>
             </div>
