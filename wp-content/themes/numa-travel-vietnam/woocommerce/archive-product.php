@@ -7,12 +7,12 @@
     <!-- Breadcrumb -->
     <nav class="mb-3 small text-muted">
       <a href="#" class="text-decoration-none text-muted">
-        Trang chủ
+        Home
       </a>
 
       <span class="mx-2">›</span>
 
-      <span>Tour</span>
+      <span>Tours</span>
     </nav>
 
     <!-- Heading -->
@@ -21,11 +21,11 @@
       <div>
 
         <h1 class="fw-bold mb-2">
-          Danh sách tour
+          Tour List
         </h1>
 
         <p class="text-muted mb-0">
-          Khám phá các tour du lịch hấp dẫn được thiết kế riêng cho bạn
+          Discover exciting travel tours specially designed for you
         </p>
 
       </div>
@@ -33,10 +33,10 @@
       <div>
 
         <select class="form-select rounded-1 shadow-sm">
-          <option>Sắp xếp: Mới nhất</option>
-          <option>Giá tăng dần</option>
-          <option>Giá giảm dần</option>
-          <option>Tour nổi bật</option>
+          <option>Sort by: Latest</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Featured Tours</option>
         </select>
 
       </div>
@@ -52,21 +52,21 @@
         <div class="border rounded-1 p-4 h-100">
 
           <h5 class="fw-bold mb-4">
-            BỘ LỌC TÌM KIẾM
+            SEARCH FILTERS
           </h5>
 
           <!-- Search -->
           <div class="mb-4">
 
             <label class="form-label fw-semibold small">
-              Tìm kiếm
+              Search
             </label>
 
             <div class="input-group">
 
               <input type="text"
                      class="form-control border-end-0 rounded-start-3"
-                     placeholder="Nhập tên tour, điểm đến...">
+                     placeholder="Enter tour name, destination...">
 
               <span class="input-group-text bg-white border-start-0 rounded-end-3">
 
@@ -95,7 +95,7 @@
           <div class="mb-4">
 
             <label class="form-label fw-semibold small">
-              Danh mục tour
+              Tour Categories
             </label>
 
             <div class="d-flex flex-column gap-3 small">
@@ -103,28 +103,28 @@
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour1">
                 <label class="form-check-label" for="tour1">
-                  Tour ghép đoàn
+                  Group Tours
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour2">
                 <label class="form-check-label" for="tour2">
-                  Tour riêng
+                  Private Tours
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour3">
                 <label class="form-check-label" for="tour3">
-                  Tour trong nước
+                  Domestic Tours
                 </label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tour4">
                 <label class="form-check-label" for="tour4">
-                  Tour nước ngoài
+                  International Tours
                 </label>
               </div>
 
@@ -133,7 +133,7 @@
           </div>
 
           <button class="btn btn-dark w-100 rounded-1">
-            Xóa bộ lọc
+            Clear Filters
           </button>
 
         </div>
@@ -145,7 +145,7 @@
 
         <div class="mb-4">
           <p class="text-muted small mb-0">
-            Hiển thị 1 - 5 trong tổng số 24 tour
+            Showing 1 - 5 of 24 tours
           </p>
         </div>
 
@@ -162,7 +162,7 @@
               <div class="col-md-4 position-relative">
 
                 <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
-                  Nổi bật
+                  Featured
                 </span>
 
                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
@@ -179,7 +179,7 @@
                   <div>
 
                     <h3 class="h4 fw-bold mb-3">
-                      Tour <?= $i ?>: Hà Nội – Hạ Long – Ninh Bình 3N2Đ
+                      Tour <?= $i ?>: Hanoi – Ha Long – Ninh Binh 3D2N
                     </h3>
 
                     <!-- Meta -->
@@ -199,7 +199,7 @@
 
                         </svg>
 
-                        3 ngày 2 đêm
+                        3 Days 2 Nights
 
                       </span>
 
@@ -217,15 +217,16 @@
 
                         </svg>
 
-                        Khởi hành: Hàng ngày
+                        Departure: Daily
 
                       </span>
 
                     </div>
 
                     <p class="text-muted mb-4">
-                      Khám phá vẻ đẹp thiên nhiên kỳ vĩ của Hạ Long,
-                      cố đô Hoa Lư Ninh Bình và những nét văn hóa đặc sắc miền Bắc.
+                      Explore the breathtaking beauty of Ha Long Bay,
+                      the ancient capital Hoa Lu in Ninh Binh,
+                      and the unique cultural charm of Northern Vietnam.
                     </p>
 
                     <!-- Features -->
@@ -245,7 +246,7 @@
 
                         </svg>
 
-                        Xe du lịch
+                        Tourist Bus
 
                       </span>
 
@@ -262,7 +263,7 @@
 
                         </svg>
 
-                        Khách sạn 3-4 sao
+                        3-4 Star Hotel
 
                       </span>
 
@@ -280,7 +281,7 @@
 
                         </svg>
 
-                        Ăn uống
+                        Meals Included
 
                       </span>
 
@@ -292,12 +293,12 @@
                   <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
 
                     <div class="fw-bold fs-3">
-                      2.990.000 VND
+                      2,990,000 VND
                     </div>
 
                     <a href="#"
                        class="btn btn-outline-primary rounded-1 px-4">
-                      Xem chi tiết
+                      View Details
                     </a>
 
                   </div>
