@@ -3,52 +3,52 @@
 
 <head>
 
-<meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0"/>
 
-<title>
+    <title>
 
-Numa Vietnam Travel
+        Numa Vietnam Travel
 
-</title>
-
-
-<link rel="stylesheet"
-href="<?php echo get_template_directory_uri(); ?>/assets/css/bootstrap.min.css">
-
-<link rel="stylesheet"
-href="<?php echo get_template_directory_uri(); ?>/assets/css/main.css">
+    </title>
 
 
-<style>
+    <link rel="stylesheet"
+          href="<?php echo get_template_directory_uri(); ?>/assets/css/bootstrap.min.css">
 
-#searchModal .modal-content{
-    border-radius:12px;
-}
+    <link rel="stylesheet"
+          href="<?php echo get_template_directory_uri(); ?>/assets/css/main.css">
 
-#searchModal .modal-header{
-    border-bottom:none;
-    padding-bottom:0;
-}
 
-#searchModal .form-control{
-    height:56px;
-    border-right:none;
-}
+    <style>
 
-#searchModal .form-control:focus{
-    box-shadow:none;
-}
+        #searchModal .modal-content{
+            border-radius:12px;
+        }
 
-#searchModal .btn{
-    width:64px;
-}
+        #searchModal .modal-header{
+            border-bottom:none;
+            padding-bottom:0;
+        }
 
-</style>
+        #searchModal .form-control{
+            height:56px;
+            border-right:none;
+        }
 
-<?php wp_head(); ?>
+        #searchModal .form-control:focus{
+            box-shadow:none;
+        }
+
+        #searchModal .btn{
+            width:64px;
+        }
+
+    </style>
+
+    <?php wp_head(); ?>
 
 </head>
 
@@ -58,259 +58,314 @@ href="<?php echo get_template_directory_uri(); ?>/assets/css/main.css">
 
 <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
 
-<div class="container">
+    <div class="container">
 
 
-<a class="navbar-brand d-flex align-items-center gap-3"
-href="#">
+        <a class="navbar-brand d-flex align-items-center gap-3"
+           href="#">
 
-<span class="brand-icon d-flex align-items-center justify-content-center">
+            <span class="brand-icon d-flex align-items-center justify-content-center">
 
-NV
+                NV
 
-</span>
+            </span>
 
-<div>
+            <div>
 
-<div class="fw-bold text-dark">
+                <div class="fw-bold text-dark">
 
-NUMA VIETNAM TRAVEL
+                    NUMA VIETNAM TRAVEL
 
-</div>
+                </div>
 
-<small class="text-muted">
+                <small class="text-muted">
 
-Vietnam Journey
+                    Vietnam Journey
 
-</small>
+                </small>
 
-</div>
+            </div>
 
-</a>
+        </a>
 
 
 
-<button class="navbar-toggler"
-type="button"
-data-bs-toggle="collapse"
-data-bs-target="#mainNav">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
 
-<span class="navbar-toggler-icon">
+            <span class="navbar-toggler-icon">
 
-</span>
+            </span>
 
-</button>
+        </button>
 
 
 
-<div class="collapse navbar-collapse"
-id="mainNav">
+        <div class="collapse navbar-collapse"
+             id="mainNav">
 
-<ul class="navbar-nav mx-auto mb-3 mb-md-0">
+            <ul class="navbar-nav mx-auto mb-3 mb-md-0">
 
 
-<li class="nav-item">
+                <li class="nav-item">
 
-<a class="nav-link active"
-href="#">
+                    <a class="nav-link active"
+                       href="/">
 
-Home
+                        Home
 
-</a>
+                    </a>
 
-</li>
+                </li>
 
 
 
-<li class="nav-item dropdown">
+                <li class="nav-item dropdown">
 
-<a class="nav-link dropdown-toggle"
-href="#"
-id="tourDropdown"
-role="button"
-data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="/tour"
+                       id="tourDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown">
 
-Tour
+                        Tour
 
-<svg class="dropdown-icon ms-1"
-width="14"
-height="14"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
+                        <svg class="dropdown-icon ms-1"
+                             width="14"
+                             height="14"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
 
-<polyline points="6 9 12 15 18 9">
+                            <polyline points="6 9 12 15 18 9">
 
-</polyline>
+                            </polyline>
 
-</svg>
+                        </svg>
 
-</a>
+                    </a>
 
 
-<ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
 
-<li>
+                        <li>
 
-<a class="dropdown-item"
-href="#">
+                            <a class="dropdown-item"
+                               href="/tour">
 
-Tour 1
+                                Hanoi Tours
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li>
+                        <li>
 
-<a class="dropdown-item"
-href="#">
+                            <a class="dropdown-item"
+                               href="/tour">
 
-Tour 2
+                                Cao Bang Loop Tours
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-<li>
+                        <li>
 
-<a class="dropdown-item"
-href="#">
+                            <a class="dropdown-item"
+                               href="/tour">
 
-Tour 3
+                                Ha Giang Loop Tours
 
-</a>
+                            </a>
 
-</li>
+                        </li>
 
-</ul>
+                    </ul>
 
-</li>
+                </li>
 
 
 
-<li class="nav-item">
+                <li class="nav-item dropdown">
 
-<a class="nav-link"
-href="#">
+                    <a class="nav-link dropdown-toggle"
+                       href="/destination"
+                       id="destinationDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown">
 
-Destinations
+                        Destination
 
-</a>
+                        <svg class="dropdown-icon ms-1"
+                             width="14"
+                             height="14"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
 
-</li>
+                            <polyline points="6 9 12 15 18 9">
 
+                            </polyline>
 
-<li class="nav-item">
+                        </svg>
 
-<a class="nav-link"
-href="#">
+                    </a>
 
-Blog
 
-</a>
+                    <ul class="dropdown-menu">
 
-</li>
+                        <li>
 
+                            <a class="dropdown-item"
+                               href="/hello-world/">
 
-<li class="nav-item">
+                                Northern Vietnam
 
-<a class="nav-link"
-href="#">
+                            </a>
 
-About
+                        </li>
 
-</a>
+                        <li>
 
-</li>
+                            <a class="dropdown-item"
+                               href="/hello-world/">
 
+                                Central Vietnam
 
-<li class="nav-item">
+                            </a>
 
-<a class="nav-link"
-href="#">
+                        </li>
 
-Contact
+                        <li>
 
-</a>
+                            <a class="dropdown-item"
+                               href="/hello-world/">
 
-</li>
+                                Southern Vietnam
 
-</ul>
+                            </a>
 
+                        </li>
 
+                    </ul>
 
-<div class="d-flex gap-2">
+                </li>
 
 
-<!-- SEARCH -->
+                <li class="nav-item">
 
-<button type="button"
-class="icon-btn"
-aria-label="Search"
-data-bs-toggle="modal"
-data-bs-target="#searchModal">
+                    <a class="nav-link"
+                       href="/blog">
 
-<svg class="icon-svg"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
+                        Blog
 
-<circle cx="11"
-cy="11"
-r="7">
+                    </a>
 
-</circle>
+                </li>
 
-<line x1="16.5"
-y1="16.5"
-x2="21"
-y2="21">
 
-</line>
+                <li class="nav-item">
 
-</svg>
+                    <a class="nav-link"
+                       href="/about">
 
-</button>
+                        About
 
+                    </a>
 
+                </li>
 
-<!-- PHONE -->
 
-<button type="button"
-class="icon-btn"
-aria-label="Call">
+                <li class="nav-item">
 
-<svg class="icon-svg"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2">
+                    <a class="nav-link"
+                       href="/contact">
 
-<path d="M22 16.92v3a2 2 0 0 1-2.18 2
-A19.79 19.79 0 0 1 3 5.18
-2 2 0 0 1 5 3h3
-a2 2 0 0 1 2 1.72
-12.13 12.13 0 0 0 .7 2.81
-2 2 0 0 1-.45 2.11
-L9.91 10.09a16 16 0 0 0 6 6
-l1.45-1.45a2 2 0 0 1 2.11-.45
-12.13 12.13 0 0 0 2.81.7
-A2 2 0 0 1 22 16.92z">
+                        Contact
 
-</path>
+                    </a>
 
-</svg>
+                </li>
 
-</button>
+            </ul>
 
-</div>
 
-</div>
 
-</div>
+            <div class="d-flex gap-2">
+
+
+                <!-- SEARCH -->
+
+                <button type="button"
+                        class="icon-btn"
+                        aria-label="Search"
+                        data-bs-toggle="modal"
+                        data-bs-target="#searchModal">
+
+                    <svg class="icon-svg"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+
+                        <circle cx="11"
+                                cy="11"
+                                r="7">
+
+                        </circle>
+
+                        <line x1="16.5"
+                              y1="16.5"
+                              x2="21"
+                              y2="21">
+
+                        </line>
+
+                    </svg>
+
+                </button>
+
+
+
+                <!-- PHONE -->
+
+                <button type="button"
+                        class="icon-btn"
+                        aria-label="Call">
+
+                    <svg class="icon-svg"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                        A19.79 19.79 0 0 1 3 5.18
+                        2 2 0 0 1 5 3h3
+                        a2 2 0 0 1 2 1.72
+                        12.13 12.13 0 0 0 .7 2.81
+                        2 2 0 0 1-.45 2.11
+                        L9.91 10.09a16 16 0 0 0 6 6
+                        l1.45-1.45a2 2 0 0 1 2.11-.45
+                        12.13 12.13 0 0 0 2.81.7
+                        A2 2 0 0 1 22 16.92z">
+
+                        </path>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </header>
 
@@ -319,78 +374,78 @@ A2 2 0 0 1 22 16.92z">
 <!-- SEARCH MODAL -->
 
 <div class="modal fade"
-id="searchModal"
-tabindex="-1"
-aria-hidden="true">
+     id="searchModal"
+     tabindex="-1"
+     aria-hidden="true">
 
-<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
 
-<div class="modal-content border-0 shadow">
+        <div class="modal-content border-0 shadow">
 
-<div class="modal-header">
+            <div class="modal-header">
 
-<h5 class="fw-bold">
+                <h5 class="fw-bold">
 
-Tìm kiếm
+                    Tìm kiếm
 
-</h5>
+                </h5>
 
-<button type="button"
-class="btn-close"
-data-bs-dismiss="modal">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
 
-</button>
+                </button>
 
-</div>
-
-
-
-<div class="modal-body">
-
-<form action="<?php echo home_url('/'); ?>"
-method="GET">
-
-<div class="input-group">
-
-<input type="text"
-name="s"
-class="form-control form-control-lg"
-placeholder="Nhập từ khóa tìm kiếm...">
+            </div>
 
 
-<button class="btn btn-dark"
-type="submit">
 
-<svg xmlns="http://www.w3.org/2000/svg"
-width="18"
-height="18"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-viewBox="0 0 24 24">
+            <div class="modal-body">
 
-<circle cx="11"
-cy="11"
-r="8">
+                <form action="<?php echo home_url('/'); ?>"
+                      method="GET">
 
-</circle>
+                    <div class="input-group">
 
-<path d="m21 21-4.3-4.3">
+                        <input type="text"
+                               name="s"
+                               class="form-control form-control-lg"
+                               placeholder="Nhập từ khóa tìm kiếm...">
 
-</path>
 
-</svg>
+                        <button class="btn btn-dark"
+                                type="submit">
 
-</button>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="18"
+                                 height="18"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 viewBox="0 0 24 24">
 
-</div>
+                                <circle cx="11"
+                                        cy="11"
+                                        r="8">
 
-</form>
+                                </circle>
 
-</div>
+                                <path d="m21 21-4.3-4.3">
 
-</div>
+                                </path>
 
-</div>
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
