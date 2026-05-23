@@ -71,10 +71,10 @@
 
     <nav class="mb-3 small text-muted">
 
-        <a href="#"
+        <a href="<?php echo home_url('/'); ?>"
            class="text-decoration-none text-muted">
 
-            Trang chủ
+            Home
 
         </a>
 
@@ -86,7 +86,7 @@
 
         <span>
 
-            Liên hệ
+            Contact
 
         </span>
 
@@ -100,13 +100,13 @@
 
         <h1 class="fw-bold mb-3">
 
-            Liên hệ với chúng tôi
+            Contact Us
 
         </h1>
 
         <p class="text-muted mb-0">
 
-            Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn
+            We are always ready to support and assist you
 
         </p>
 
@@ -116,7 +116,7 @@
 
     <!-- TOP -->
 
-    <div class="row g-4 mb-4">
+    <div class="row g-4">
 
 
         <!-- FORM -->
@@ -127,7 +127,7 @@
 
                 <h3 class="fw-bold mb-4">
 
-                    Gửi tin nhắn cho chúng tôi
+                    Send Us A Message
 
                 </h3>
 
@@ -137,7 +137,7 @@
 
                         <input type="text"
                                class="form-control"
-                               placeholder="Họ và tên *">
+                               placeholder="Full Name *">
 
                     </div>
 
@@ -155,7 +155,7 @@
 
                         <input type="text"
                                class="form-control"
-                               placeholder="Số điện thoại *">
+                               placeholder="Phone Number *">
 
                     </div>
 
@@ -166,25 +166,25 @@
 
                             <option>
 
-                                Chủ đề *
+                                Subject *
 
                             </option>
 
                             <option>
 
-                                Tư vấn tour
+                                Tour Consultation
 
                             </option>
 
                             <option>
 
-                                Đặt tour
+                                Tour Booking
 
                             </option>
 
                             <option>
 
-                                Hỗ trợ khách hàng
+                                Customer Support
 
                             </option>
 
@@ -196,14 +196,14 @@
                     <div class="mb-4">
 
                         <textarea class="form-control"
-                                  placeholder="Nội dung tin nhắn *"></textarea>
+                                  placeholder="Message *"></textarea>
 
                     </div>
 
 
                     <button class="btn btn-outline-dark px-5">
 
-                        Gửi tin nhắn
+                        Send Message
 
                     </button>
 
@@ -223,12 +223,14 @@
 
                 <h3 class="fw-bold mb-5">
 
-                    Thông tin công ty
+                    Company Information
 
                 </h3>
 
 
 
+                <!-- COMPANY -->
+
                 <div class="contact-info-item">
 
                     <div class="contact-info-icon">
@@ -239,12 +241,12 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <rect x="4"
-                              y="3"
-                              width="16"
-                              height="18"/>
+                            <rect x="4"
+                                  y="3"
+                                  width="16"
+                                  height="18"/>
 
-                        <path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2"/>
+                            <path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2"/>
 
                         </svg>
 
@@ -252,13 +254,15 @@
 
                     <div>
 
-                        CÔNG TY TNHH NUMA VIETNAM TRAVEL
+                        NUMA VIETNAM TRAVEL CO., LTD
 
                     </div>
 
                 </div>
 
 
+
+                <!-- PHONE -->
 
                 <div class="contact-info-item">
 
@@ -270,12 +274,12 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <path d="M22 16.9v3a2 2 0 0 1-2.2 2
-                        c-9-1-16-8-17-17A2 2 0 0 1 4.9 2h3
-                        a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8
-                        L8 10a16 16 0 0 0 6 6l1.5-1.8
-                        a2 2 0 0 1 1.8-.6l3 .5
-                        A2 2 0 0 1 22 16.9z"/>
+                            <path d="M22 16.9v3a2 2 0 0 1-2.2 2
+                            c-9-1-16-8-17-17A2 2 0 0 1 4.9 2h3
+                            a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8
+                            L8 10a16 16 0 0 0 6 6l1.5-1.8
+                            a2 2 0 0 1 1.8-.6l3 .5
+                            A2 2 0 0 1 22 16.9z"/>
 
                         </svg>
 
@@ -283,13 +287,15 @@
 
                     <div>
 
-                        1900 1234
+                        090171551
 
                     </div>
 
                 </div>
 
 
+
+                <!-- EMAIL -->
 
                 <div class="contact-info-item">
 
@@ -301,12 +307,12 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <rect x="3"
-                              y="5"
-                              width="18"
-                              height="14"/>
+                            <rect x="3"
+                                  y="5"
+                                  width="18"
+                                  height="14"/>
 
-                        <path d="M3 7l9 7 9-7"/>
+                            <path d="M3 7l9 7 9-7"/>
 
                         </svg>
 
@@ -314,13 +320,15 @@
 
                     <div>
 
-                        info@numavietnamtravel.com
+                        viethung1588@gmail.com
 
                     </div>
 
                 </div>
 
 
+
+                <!-- WEBSITE -->
 
                 <div class="contact-info-item">
 
@@ -332,13 +340,13 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <circle cx="12"
-                                cy="12"
-                                r="9"/>
+                            <circle cx="12"
+                                    cy="12"
+                                    r="9"/>
 
-                        <path d="M3 12h18"/>
-                        <path d="M12 3a15 15 0 0 1 0 18"/>
-                        <path d="M12 3a15 15 0 0 0 0 18"/>
+                            <path d="M3 12h18"/>
+                            <path d="M12 3a15 15 0 0 1 0 18"/>
+                            <path d="M12 3a15 15 0 0 0 0 18"/>
 
                         </svg>
 
@@ -354,6 +362,8 @@
 
 
 
+                <!-- ADDRESS -->
+
                 <div class="contact-info-item">
 
                     <div class="contact-info-icon">
@@ -364,13 +374,13 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <path d="M12 21s-6-5-6-11
-                        a6 6 0 1 1 12 0
-                        c0 6-6 11-6 11z"/>
+                            <path d="M12 21s-6-5-6-11
+                            a6 6 0 1 1 12 0
+                            c0 6-6 11-6 11z"/>
 
-                        <circle cx="12"
-                                cy="10"
-                                r="2"/>
+                            <circle cx="12"
+                                    cy="10"
+                                    r="2"/>
 
                         </svg>
 
@@ -378,14 +388,17 @@
 
                     <div>
 
-                        123 Lê Lợi, Phường Bến Nghé,
-                        Quận 1, TP Hồ Chí Minh
+                        15 Ngõ 175 Đường Bát Khối,
+                        Tư Đình, Long Biên,
+                        Hà Nội, Việt Nam
 
                     </div>
 
                 </div>
 
 
+
+                <!-- WORKING HOURS -->
 
                 <div class="contact-info-item mb-0">
 
@@ -397,11 +410,11 @@
                              stroke-width="1.8"
                              viewBox="0 0 24 24">
 
-                        <circle cx="12"
-                                cy="12"
-                                r="9"/>
+                            <circle cx="12"
+                                    cy="12"
+                                    r="9"/>
 
-                        <path d="M12 7v5l3 2"/>
+                            <path d="M12 7v5l3 2"/>
 
                         </svg>
 
@@ -409,7 +422,7 @@
 
                     <div>
 
-                        Thứ 2 - Chủ nhật:
+                        Monday - Sunday:
                         08:00 - 20:00
 
                     </div>
@@ -426,18 +439,21 @@
 
     <!-- MAP -->
 
-    <section class="map-section mb-4">
+    <section class="map-section my-4">
 
         <h3 class="fw-bold mb-4">
 
-            Bản đồ
+            Google Maps
 
         </h3>
 
         <div class="map-box">
 
             <iframe
-            src="https://maps.google.com/maps?q=ho%20chi%20minh&t=&z=13&ie=UTF8&iwloc=&output=embed">
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=15%20Ng%C3%B5%20175%20%C4%90%C6%B0%E1%BB%9Dng%20B%C3%A1t%20Kh%E1%BB%91i%2C%20Long%20Bi%C3%AAn%2C%20H%C3%A0%20N%E1%BB%99i&t=&z=15&ie=UTF8&iwloc=&output=embed">
 
             </iframe>
 
@@ -452,13 +468,13 @@
     <div class="row g-4">
 
 
+        <!-- CALL -->
+
         <div class="col-md-6 col-lg-3">
 
             <div class="bottom-card">
 
                 <div class="bottom-icon">
-
-                    <!-- phone -->
 
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -466,8 +482,8 @@
                          stroke-width="1.8"
                          viewBox="0 0 24 24">
 
-                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2
-                    c-9-1-16-8-17-17A2 2 0 0 1 4.9 2h3"/>
+                        <path d="M22 16.9v3a2 2 0 0 1-2.2 2
+                        c-9-1-16-8-17-17A2 2 0 0 1 4.9 2h3"/>
 
                     </svg>
 
@@ -475,13 +491,13 @@
 
                 <h6 class="fw-bold">
 
-                    Gọi ngay
+                    Call Us
 
                 </h6>
 
                 <div class="text-muted">
 
-                    1900 1234
+                    090171551
 
                 </div>
 
@@ -491,6 +507,8 @@
 
 
 
+        <!-- EMAIL -->
+
         <div class="col-md-6 col-lg-3">
 
             <div class="bottom-card">
@@ -503,12 +521,12 @@
                          stroke-width="1.8"
                          viewBox="0 0 24 24">
 
-                    <rect x="3"
-                          y="5"
-                          width="18"
-                          height="14"/>
+                        <rect x="3"
+                              y="5"
+                              width="18"
+                              height="14"/>
 
-                    <path d="M3 7l9 7 9-7"/>
+                        <path d="M3 7l9 7 9-7"/>
 
                     </svg>
 
@@ -522,7 +540,7 @@
 
                 <div class="text-muted">
 
-                    info@numavietnamtravel.com
+                    viethung1588@gmail.com
 
                 </div>
 
@@ -531,6 +549,8 @@
         </div>
 
 
+
+        <!-- SUPPORT -->
 
         <div class="col-md-6 col-lg-3">
 
@@ -544,9 +564,9 @@
                          stroke-width="1.8"
                          viewBox="0 0 24 24">
 
-                    <path d="M21 11a8 8 0 0 1-8 8
-                    H7l-4 3v-7
-                    a8 8 0 1 1 18-4z"/>
+                        <path d="M21 11a8 8 0 0 1-8 8
+                        H7l-4 3v-7
+                        a8 8 0 1 1 18-4z"/>
 
                     </svg>
 
@@ -554,13 +574,13 @@
 
                 <h6 class="fw-bold">
 
-                    Chat trực tuyến
+                    Live Chat
 
                 </h6>
 
                 <div class="text-muted">
 
-                    Hỗ trợ 24/7
+                    24/7 Support
 
                 </div>
 
@@ -569,6 +589,8 @@
         </div>
 
 
+
+        <!-- FANPAGE -->
 
         <div class="col-md-6 col-lg-3">
 
@@ -582,12 +604,12 @@
                          stroke-width="1.8"
                          viewBox="0 0 24 24">
 
-                    <circle cx="12"
-                            cy="12"
-                            r="9"/>
+                        <circle cx="12"
+                                cy="12"
+                                r="9"/>
 
-                    <path d="M13 8h2V5h-2
-                    c-2 0-3 1-3 3v2H8v3h2v6h3v-6h2l1-3h-3V8z"/>
+                        <path d="M13 8h2V5h-2
+                        c-2 0-3 1-3 3v2H8v3h2v6h3v-6h2l1-3h-3V8z"/>
 
                     </svg>
 
