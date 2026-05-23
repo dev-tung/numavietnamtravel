@@ -24,6 +24,10 @@
 
     <style>
 
+        /* =========================================
+        SEARCH MODAL
+        ========================================= */
+
         #searchModal .modal-content{
             border-radius:12px;
         }
@@ -44,6 +48,79 @@
 
         #searchModal .btn{
             width:64px;
+        }
+
+        /* =========================================
+        TOUR MENU 2 LEVEL
+        ========================================= */
+
+        .navbar .dropdown:hover > .dropdown-menu{
+            display:block;
+            margin-top:0;
+        }
+
+        /* MAIN DROPDOWN */
+
+        .main-dropdown{
+            min-width:260px;
+            border-radius:12px;
+            border:1px solid #eee;
+            padding:10px 0;
+        }
+
+        /* SUBMENU WRAPPER */
+
+        .dropdown-submenu{
+            position:relative;
+        }
+
+        /* SUBMENU */
+
+        .dropdown-submenu .submenu{
+            position:absolute;
+            top:-10px;
+            left:100%;
+            display:none;
+            min-width:260px;
+            border-radius:12px;
+            border:1px solid #eee;
+            padding:10px 0;
+        }
+
+        /* SHOW SUBMENU */
+
+        .dropdown-submenu:hover > .submenu{
+            display:block;
+        }
+
+        /* ITEM */
+
+        .dropdown-item{
+            padding:10px 18px;
+            font-size:15px;
+        }
+
+        /* HOVER */
+
+        .dropdown-item:hover{
+            background:#f5f5f5;
+        }
+
+        /* ARROW */
+
+        .submenu-toggle{
+            display:flex !important;
+            align-items:center;
+            justify-content:space-between;
+            width:100%;
+        }
+
+        .submenu-toggle::after{
+            content:"›";
+            font-size:18px;
+            line-height:1;
+            flex-shrink:0;
+            margin-left:20px;
         }
 
     </style>
@@ -104,15 +181,17 @@
 
 
         <div class="collapse navbar-collapse"
-             id="mainNav">
+            id="mainNav">
 
             <ul class="navbar-nav mx-auto mb-3 mb-md-0">
 
 
+                <!-- HOME -->
+
                 <li class="nav-item">
 
                     <a class="nav-link active"
-                       href="/">
+                    href="<?php echo home_url('/'); ?>">
 
                         Home
 
@@ -120,69 +199,143 @@
 
                 </li>
 
-
+                <!-- TOUR -->
 
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle"
-                       href="/tour"
-                       id="tourDropdown"
-                       role="button"
-                       data-bs-toggle="dropdown">
+                    href="#"
+                    id="tourDropdown"
+                    role="button">
 
                         Tour
 
                         <svg class="dropdown-icon ms-1"
-                             width="14"
-                             height="14"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2">
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2">
 
-                            <polyline points="6 9 12 15 18 9">
-
-                            </polyline>
+                            <polyline points="6 9 12 15 18 9"></polyline>
 
                         </svg>
 
                     </a>
 
 
-                    <ul class="dropdown-menu">
+                    <?php
 
-                        <li>
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LEVEL 1
+                    | REGION CATEGORIES
+                    |--------------------------------------------------------------------------
+                    */
 
-                            <a class="dropdown-item"
-                               href="/tour">
+                    $regions = get_terms([
+                        'taxonomy'   => 'product_cat',
+                        'parent'     => 0,
+                        'hide_empty' => false,
+                        'orderby'    => 'menu_order',
+                        'order'      => 'ASC',
+                    ]);
 
-                                Hanoi Tours
+                    ?>
 
-                            </a>
 
-                        </li>
+                    <ul class="dropdown-menu main-dropdown">
 
-                        <li>
+                        <?php foreach ($regions as $region): ?>
 
-                            <a class="dropdown-item"
-                               href="/tour">
+                            <?php
 
-                                Cao Bang Loop Tours
+                            /*
+                            |--------------------------------------------------------------------------
+                            | SKIP WOOCOMMERCE DEFAULT CATEGORY
+                            |--------------------------------------------------------------------------
+                            */
 
-                            </a>
+                            if (
+                                strtolower($region->slug) === 'uncategorized'
+                            ) {
+                                continue;
+                            }
 
-                        </li>
+                            /*
+                            |--------------------------------------------------------------------------
+                            | LEVEL 2
+                            | DESTINATION CATEGORIES
+                            |--------------------------------------------------------------------------
+                            */
 
-                        <li>
+                            $destinations = get_terms([
+                                'taxonomy'   => 'product_cat',
+                                'parent'     => $region->term_id,
+                                'hide_empty' => false,
+                                'orderby'    => 'menu_order',
+                                'order'      => 'ASC',
+                            ]);
 
-                            <a class="dropdown-item"
-                               href="/tour">
+                            ?>
 
-                                Ha Giang Loop Tours
+                            <li class="dropdown-submenu">
 
-                            </a>
+                                <!-- REGION -->
 
-                        </li>
+                                <a class="dropdown-item submenu-toggle"
+                                href="<?php echo esc_url(get_term_link($region)); ?>">
+
+                                    <?php echo esc_html($region->name); ?>
+
+                                </a>
+
+
+                                <!-- LEVEL 2 -->
+
+                                <?php if (!empty($destinations)): ?>
+
+                                    <ul class="dropdown-menu submenu">
+
+                                        <?php foreach ($destinations as $destination): ?>
+
+                                            <?php
+
+                                            /*
+                                            |--------------------------------------------------------------------------
+                                            | SKIP WOOCOMMERCE DEFAULT CATEGORY
+                                            |--------------------------------------------------------------------------
+                                            */
+
+                                            if (
+                                                strtolower($destination->slug) === 'uncategorized'
+                                            ) {
+                                                continue;
+                                            }
+
+                                            ?>
+
+                                            <li>
+
+                                                <a class="dropdown-item"
+                                                href="<?php echo esc_url(get_term_link($destination)); ?>">
+
+                                                    <?php echo esc_html($destination->name); ?>
+
+                                                </a>
+
+                                            </li>
+
+                                        <?php endforeach; ?>
+
+                                    </ul>
+
+                                <?php endif; ?>
+
+                            </li>
+
+                        <?php endforeach; ?>
 
                     </ul>
 
@@ -190,77 +343,12 @@
 
 
 
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="/destination"
-                       id="destinationDropdown"
-                       role="button"
-                       data-bs-toggle="dropdown">
-
-                        Destination
-
-                        <svg class="dropdown-icon ms-1"
-                             width="14"
-                             height="14"
-                             viewBox="0 0 24 24"
-                             fill="none"
-                             stroke="currentColor"
-                             stroke-width="2">
-
-                            <polyline points="6 9 12 15 18 9">
-
-                            </polyline>
-
-                        </svg>
-
-                    </a>
-
-
-                    <ul class="dropdown-menu">
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="/hello-world/">
-
-                                Northern Vietnam
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="/hello-world/">
-
-                                Central Vietnam
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="/hello-world/">
-
-                                Southern Vietnam
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
+                <!-- BLOG -->
 
                 <li class="nav-item">
 
                     <a class="nav-link"
-                       href="/blog">
+                    href="<?php echo home_url('/blog/'); ?>">
 
                         Blog
 
@@ -269,10 +357,13 @@
                 </li>
 
 
+
+                <!-- ABOUT -->
+
                 <li class="nav-item">
 
                     <a class="nav-link"
-                       href="/about">
+                    href="<?php echo home_url('/about/'); ?>">
 
                         About
 
@@ -281,10 +372,13 @@
                 </li>
 
 
+
+                <!-- CONTACT -->
+
                 <li class="nav-item">
 
                     <a class="nav-link"
-                       href="/contact">
+                    href="<?php echo home_url('/contact/'); ?>">
 
                         Contact
 
@@ -308,10 +402,10 @@
                         data-bs-target="#searchModal">
 
                     <svg class="icon-svg"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
 
                         <circle cx="11"
                                 cy="11"
@@ -320,9 +414,9 @@
                         </circle>
 
                         <line x1="16.5"
-                              y1="16.5"
-                              x2="21"
-                              y2="21">
+                            y1="16.5"
+                            x2="21"
+                            y2="21">
 
                         </line>
 
@@ -339,10 +433,10 @@
                         aria-label="Call">
 
                     <svg class="icon-svg"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
 
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2
                         A19.79 19.79 0 0 1 3 5.18
