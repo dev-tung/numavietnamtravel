@@ -1,46 +1,413 @@
 <?php get_header(); ?>
 
-  <section class="hero mb-5">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner overflow-hidden shadow-sm">
-          <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Vietnam beach" />
-            <div class="carousel-caption text-start d-none d-md-block p-4 rounded-4 shadow">
-              <span class="eyebrow text-uppercase fw-semibold text-primary small mb-2 d-inline-block">Explore Vietnam</span>
-              <h1 class="display-5 fw-bold mb-3">Amazing Island & Beach Experiences</h1>
-              <p class="lead text-white mb-4">All-inclusive tours, high-quality services, and flexible itineraries for every traveler.</p>
-              <a href="#" class="btn btn-primary btn-lg">Discover Now</a>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Hanoi" />
-            <div class="carousel-caption text-start d-none d-md-block p-4 rounded-4 shadow">
-              <span class="eyebrow text-uppercase fw-semibold text-primary small mb-2 d-inline-block">Hanoi Tours</span>
-              <h1 class="display-5 fw-bold mb-3">Discover the Capital Journey</h1>
-              <p class="lead text-white mb-4">Experience Hanoi’s culture and cuisine with Numa Travel.</p>
-              <a href="#" class="btn btn-primary btn-lg">View Tours</a>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Da Nang" />
-            <div class="carousel-caption text-start d-none d-md-block p-4 rounded-4 shadow">
-              <span class="eyebrow text-uppercase fw-semibold text-primary small mb-2 d-inline-block">Central Vietnam Tours</span>
-              <h1 class="display-5 fw-bold mb-3">Colors of Da Nang & Hoi An</h1>
-              <p class="lead text-white mb-4">Enjoy blue beaches and ancient towns in a unique travel experience.</p>
-              <a href="#" class="btn btn-primary btn-lg">View Tours</a>
-            </div>
-          </div>
+<section class="hero mb-5">
+
+    <div id="heroCarousel"
+         class="carousel slide carousel-fade"
+         data-bs-ride="carousel">
+
+        <!-- INDICATORS -->
+
+        <div class="carousel-indicators">
+
+            <button type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="0"
+                    class="active"></button>
+
+            <button type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="1"></button>
+
+            <button type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="2"></button>
+
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+
+
+        <!-- SLIDES -->
+
+        <div class="carousel-inner overflow-hidden shadow-sm">
+
+
+          <!-- SLIDE 1 -->
+
+          <div class="carousel-item active">
+
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
+                  class="d-block w-100 hero-image"
+                  alt="Ha Long Bay Cruises" />
+
+              <div class="hero-overlay"></div>
+
+              <div class="carousel-caption text-start">
+
+                  <div class="hero-content">
+
+                      <span class="hero-eyebrow">
+
+                          Ha Long Bay Cruises
+
+                      </span>
+
+                      <h1 class="hero-title">
+
+                          Amazing Ha Long Bay Cruise Experiences
+
+                      </h1>
+
+                      <p class="hero-description">
+
+                          Explore Ha Long Bay, Lan Ha Bay,
+                          and Bai Tu Long Bay with premium cruises.
+
+                      </p>
+
+                      <a href="<?php echo home_url('/product-category/northern-vietnam-tours/ha-long-bay-cruises/'); ?>"
+                        class="btn btn-primary btn-lg px-4">
+
+                          Discover Now
+
+                      </a>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+
+
+          <!-- SLIDE 2 -->
+
+          <div class="carousel-item">
+
+              <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1600&q=80"
+                  class="d-block w-100 hero-image"
+                  alt="Hanoi Tours" />
+
+              <div class="hero-overlay"></div>
+
+              <div class="carousel-caption text-start">
+
+                  <div class="hero-content">
+
+                      <span class="hero-eyebrow">
+
+                          Hanoi Tours
+
+                      </span>
+
+                      <h2 class="hero-title">
+
+                          Discover Hanoi Capital Journey
+
+                      </h2>
+
+                      <p class="hero-description">
+
+                          Experience Hanoi street food,
+                          culture, and local lifestyle.
+
+                      </p>
+
+                      <a href="<?php echo home_url('/product-category/northern-vietnam-tours/hanoi-tours/'); ?>"
+                        class="btn btn-primary btn-lg px-4">
+
+                          View Tours
+
+                      </a>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+
+
+          <!-- SLIDE 3 -->
+
+          <div class="carousel-item">
+
+              <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80"
+                  class="d-block w-100 hero-image"
+                  alt="Central Vietnam Tours" />
+
+              <div class="hero-overlay"></div>
+
+              <div class="carousel-caption text-start">
+
+                  <div class="hero-content">
+
+                      <span class="hero-eyebrow">
+
+                          Central Vietnam Tours
+
+                      </span>
+
+                      <h2 class="hero-title">
+
+                          Explore Da Nang & Hoi An
+
+                      </h2>
+
+                      <p class="hero-description">
+
+                          Enjoy beaches, local food,
+                          and ancient towns in Central Vietnam.
+
+                      </p>
+
+                      <a href="<?php echo home_url('/product-category/central-vietnam-tours/'); ?>"
+                        class="btn btn-primary btn-lg px-4">
+
+                          View Tours
+
+                      </a>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PREV -->
+
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="prev">
+
+            <span class="carousel-control-prev-icon"></span>
+
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+
+
+        <!-- NEXT -->
+
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="next">
+
+            <span class="carousel-control-next-icon"></span>
+
         </button>
-      </div>
-  </section>
+
+    </div>
+
+</section>
+
+
+
+<style>
+
+/* =========================================
+HERO
+========================================= */
+
+.hero-image{
+    height:720px;
+    object-fit:cover;
+}
+
+/* OVERLAY */
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to right,
+        rgba(0,0,0,0.65) 0%,
+        rgba(0,0,0,0.35) 45%,
+        rgba(0,0,0,0.15) 100%
+    );
+    z-index:1;
+}
+
+/* CAPTION */
+
+.carousel-caption{
+    z-index:2;
+    left:8%;
+    right:auto;
+    bottom:50%;
+    transform:translateY(50%);
+    text-align:left;
+    max-width:720px;
+}
+
+/* CONTENT */
+
+.hero-content{
+    animation:fadeUp 0.8s ease;
+}
+
+/* EYEBROW */
+
+.hero-eyebrow{
+    display:inline-block;
+    margin-bottom:18px;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(8px);
+    color:#6FC0F7;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+/* TITLE */
+
+.hero-title{
+    font-size:64px;
+    line-height:1.1;
+    font-weight:800;
+    color:#fff;
+    margin-bottom:24px;
+}
+
+/* DESCRIPTION */
+
+.hero-description{
+    font-size:20px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.92);
+    margin-bottom:36px;
+    max-width:620px;
+}
+
+/* BUTTON */
+
+.hero .btn-primary{
+    background:#6FC0F7;
+    border-color:#6FC0F7;
+    padding-top:14px;
+    padding-bottom:14px;
+    font-weight:600;
+    border-radius:999px;
+}
+
+.hero .btn-primary:hover{
+    background:#58b3f1;
+    border-color:#58b3f1;
+}
+
+/* CONTROLS */
+
+.carousel-control-prev,
+.carousel-control-next{
+    width:70px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background-color:rgba(255,255,255,0.18);
+    backdrop-filter:blur(8px);
+    background-size:50%;
+}
+
+/* INDICATORS */
+
+.carousel-indicators{
+    margin-bottom:28px;
+}
+
+.carousel-indicators button{
+    width:12px !important;
+    height:12px !important;
+    border-radius:50%;
+    border:none !important;
+    background:#fff !important;
+    opacity:0.5;
+}
+
+.carousel-indicators .active{
+    opacity:1;
+    background:#6FC0F7 !important;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(24px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media (max-width:991px){
+
+    .hero-image{
+        height:620px;
+    }
+
+    .carousel-caption{
+        left:6%;
+        right:6%;
+        bottom:80px;
+        transform:none;
+        max-width:none;
+    }
+
+    .hero-title{
+        font-size:44px;
+    }
+
+    .hero-description{
+        font-size:18px;
+    }
+
+}
+
+@media (max-width:767px){
+
+    .hero-image{
+        height:540px;
+    }
+
+    .hero-title{
+        font-size:32px;
+    }
+
+    .hero-description{
+        font-size:16px;
+        line-height:1.6;
+    }
+
+    .hero-eyebrow{
+        font-size:11px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next{
+        display:none;
+    }
+
+}
+
+</style>
 
   <main class="container py-4">
     <section class="mb-5">
