@@ -120,21 +120,21 @@
 
                     <p class="mb-2">
 
-                        <strong>Phone</strong>
+                        
                         090171551
 
                     </p>
 
                     <p class="mb-2">
 
-                        <strong>Email</strong>
+                        
                         viethung1588@gmail.com
 
                     </p>
 
                     <p class="mb-0">
 
-                        <strong>Address</strong>
+                        
                         15 Ngõ 175 Đường Bát Khối, Tư Đình, Long Biên, Hà Nội, Việt Nam
 
                     </p>

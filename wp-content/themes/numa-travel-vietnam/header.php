@@ -428,9 +428,9 @@
 
                 <!-- PHONE -->
 
-                <button type="button"
-                        class="icon-btn"
-                        aria-label="Call">
+                <a href="tel:090171551"
+                class="icon-btn"
+                aria-label="Call">
 
                     <svg class="icon-svg"
                         viewBox="0 0 24 24"
@@ -453,7 +453,7 @@
 
                     </svg>
 
-                </button>
+                </a>
 
             </div>
 
