@@ -59,6 +59,19 @@
             margin-top:0;
         }
 
+        @media (min-width: 768px){
+
+            .navbar .dropdown:hover > .dropdown-menu{
+                display:block;
+                margin-top:0;
+            }
+
+            .dropdown-submenu:hover > .submenu{
+                display:block;
+            }
+
+        }
+
         /* MAIN DROPDOWN */
 
         .main-dropdown{
@@ -543,3 +556,4 @@
     </div>
 
 </div>
+

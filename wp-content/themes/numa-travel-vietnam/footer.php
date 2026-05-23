@@ -218,7 +218,47 @@
 
 
 <script src="<?php echo get_template_directory_uri(); ?>/assets/js/bootstrap.bundle.min.js"></script>
+<script>
 
+document.addEventListener('DOMContentLoaded', function () {
+
+    const navbarCollapse = document.getElementById('mainNav');
+
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+    });
+
+    // CLICK OUTSIDE => CLOSE MENU
+
+    document.addEventListener('click', function (e) {
+
+        const isClickInside =
+            navbarCollapse.contains(e.target) ||
+            e.target.closest('.navbar-toggler');
+
+        if (!isClickInside && navbarCollapse.classList.contains('show')) {
+            bsCollapse.hide();
+        }
+
+    });
+
+    // CLICK NAV LINK => CLOSE MENU MOBILE
+
+    document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+
+        link.addEventListener('click', function () {
+
+            if (window.innerWidth < 768) {
+                bsCollapse.hide();
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 <?php wp_footer(); ?>
 
 </body>

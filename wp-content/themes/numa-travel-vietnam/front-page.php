@@ -248,6 +248,32 @@ HERO
     animation:fadeUp 0.8s ease;
 }
 
+/* =========================================
+HERO BUTTON MOBILE FIX
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero-content .btn {
+        font-size: 14px;
+        padding: 8px 14px !important;
+        border-radius: 6px;
+    }
+
+    .hero-title {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-eyebrow {
+        font-size: 12px;
+    }
+}
+
 /* EYEBROW */
 
 .hero-eyebrow{
