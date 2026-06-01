@@ -151,31 +151,10 @@
     <div class="container">
 
 
-        <a class="navbar-brand d-flex align-items-center gap-3"
-           href="#">
-
-            <span class="brand-icon d-flex align-items-center justify-content-center">
-
-                NV
-
-            </span>
-
-            <div>
-
-                <div class="fw-bold text-dark">
-
-                    NUMA VIETNAM TRAVEL
-
-                </div>
-
-                <small class="text-muted">
-
-                    Vietnam Journey
-
-                </small>
-
-            </div>
-
+        <a class="navbar-brand" href="<?php echo home_url(); ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/numalogo.png"
+                alt="<?php bloginfo('name'); ?>"
+                height="60">
         </a>
 
 
