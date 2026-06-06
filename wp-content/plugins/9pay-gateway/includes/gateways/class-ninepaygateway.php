@@ -21,6 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 class NinePayGateway extends NinePay {
 
 	/**
+	 * Khai báo properties để tránh dynamic property deprecation trong PHP 8.2+
+	 */
+	public $is_testing;
+	public $debug;
+	public $finish_notify_text;
+	public $fullname;
+	public $phone;
+
+	/**
 	 * NinePayGW construct
 	 */
 	public function __construct() {

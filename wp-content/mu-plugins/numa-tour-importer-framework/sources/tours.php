@@ -1,0 +1,102 @@
+<?php
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+return [
+
+    'Northern Vietnam Tours' => [
+        'Hanoi Tours' => [
+            'Hanoi City Tours' => [
+                'https://cozyvietnamtravel.com/tour/hanoi-city-tour-1-day/',
+                'https://daytourshanoi.com/tour/hanoi-half-day-city-tour/',
+            ],
+            'Street Food Tours' => [
+                'https://cozyvietnamtravel.com/tour/hanoi-street-food-tour-1-day/',
+            ],
+            'Motorbike Tours' => [
+                'https://daytourshanoi.com/tour/seeing-hanoi-on-motorbike/',
+            ],
+            'Handicraft Village Tours' => [
+                'https://goasiatravel.com/hanoi-city-tour-with-incense-village-train-street-must-see-places-with-lunch-egg-coffee/',
+            ],
+        ],
+
+        'Ha Long Bay Cruises' => [
+            '1 Day Cruises' => [
+                'https://halongexcursion.com/?product=ha-long-excursion-6-hour-cruise-by-thaco-17-seats-deluxe-tour',
+                'https://arcadycruise.com/premium-day-cruise/',
+                'https://sunlightcruise.com/Ha-long-Cruise/sunlight-grand-5-star-day-cruise.html',
+                'https://victoryeratravel.com/?product=symphony-5-star-cruise-one-day',
+                'https://ambassadorcruise.com/ambassador-day-cruise/',
+                'https://victoryeratravel.com/?product=sea-octopus-cruise-one-day',
+                'https://dolphinhalongcruise.com/',
+            ],
+
+            '2 Days / 1 Night Cruises' => [
+                'https://cozybaycruise.com/cozy-bay-grand-cruise/',
+                'https://www.bestpricetravel.com/en-au/halong-bay-cruises/hera-cruise.html',
+                'https://arcadycruise.com/itineraries/halong-bay-2-days-1-night-trip/',
+                'https://victoryeratravel.com/?product=ha-noi-city-tour-7-days-6-nights',
+            ],
+
+            '3 Days / 2 Nights Cruises' => [
+                'https://sunlightcruise.com/Ha-long-Cruise/3-days-2-night-cruise.html',
+                'https://sunlightcruise.com/Ha-long-Cruise/3-days-2-night-cruise-and-cat-ba-island-hotel.html',
+                'https://heracruises.vn/itinerary/03-days-02-nights-5star-hera-grand-luxury-cruise-halong?gad_source=1&gad_campaignid=23490942923&gbraid=0AAAAApePPX60AH2anIp3SqkpNe9GH9Ltg&gclid=CjwKCAjwxITRBhBYEiwA6mZm7Tn5oyT9Zg-Ln61JOkJo54BWvw8pPnxSG4WKWYW40GQSIQYC1cCMtRoCkAsQAvD_BwE',
+                'https://heracruises.vn/itinerary/03-days-02-nights-5star-hera-grand-luxury-cruise-halong',
+                'https://victoryeratravel.com/?product=sea-stars-cruise-2-days-1night',
+            ],
+        ],
+
+        'Lan Ha Bay Cruises' => [
+            '1 Day Cruises' => [
+                'https://taliyacruise.com/lan-ha-bay-1-day-trip/',
+                'https://halongserenitycruises.com/lan-ha-halong-bay-day-trip/',
+                'https://vegatravel.vn/vega_trip/explore-the-wonders-of-halong-5-star-day-tour-with-leona-cruise/',
+                'https://halongserenitycruises.com/serenity-grandeur-cruise-lan-ha-bay-1-day-tour-from-hanoi/',
+            ],
+
+            '2 Days / 1 Night Cruises' => [
+                'https://sunlightcruise.com/Lan-Ha-Cruise/2-days-1-night-cruise-1.html',
+                'https://sunlightcruise.com/Lan-Ha-Cruise/Premium%20Cruise%202-days-1-night-cruise-2.html',
+                'https://lapandoracruises.com/2-days-1-night-t-606-727.html',
+                'https://auroracruise.vn/category/itinerary/',
+                'https://doracruise.com/dora-cruise-2-days-1-night.html',
+                'https://doriscruise.com/doris-cruise-2-days.html',
+                'https://halongserenitycruises.com/lan-ha-halong-bay-cruise-2-days-1-night-tour/',
+                'https://velaroftheseas.com/discovery-halong-bay-lan-ha-bay-2days-1night/',
+                'https://tulipcruise.com/tulip-cruise-2-days-1-night/',
+            ],
+
+            '3 Days / 2 Nights Cruises' => [
+                'https://sunlightcruise.com/Lan-Ha-Cruise/3-days-2-night-cruise-1.html',
+                'https://sunlightcruise.com/Lan-Ha-Cruise/3-days-2-night-cruise-and-cat-ba-island-hotel-bungalow.html',
+                'https://sunlightcruise.com/Lan-Ha-Cruise/3-days-2-nights-cruise.html',
+                'https://sunlightcruise.com/Lan-Ha-Cruise/3-days-2-nights-cruise-and-cat-ba-island-hotel-bungalow.html',
+                'https://lapandoracruises.com/3-days-2-nights-t-606-729.html',
+                'https://auroracruise.vn/category/itinerary/',
+                'https://doracruise.com/dora-cruise-3-days-2-nights.html',
+                'https://doriscruise.com/doris-cruise-3-days.html',
+                'https://velaroftheseas.com/discovery-halong-bay-lan-ha-bay-3days-2nights/',
+                'https://tulipcruise.com/tulip-cruise-3-days-2-nights/',
+            ],
+        ],
+
+        'Bai Tu Long Bay Cruises' => [
+            '2 Days / 1 Night Cruises' => [
+                'https://swancruiseshalong.com/itinerarie/bai-tu-long-swan-cruises-2-days-1-night',
+                'https://reneacruiseshalong.com/2-days-1-night-cruise/',
+                'https://senacruises.com/2-days-1-night-ha-long-bay-tour-with-sena-cruises.html',
+            ],
+
+            '3 Days / 2 Nights Cruises' => [
+                'https://swancruiseshalong.com/itinerarie/bai-tu-long-bay-swan-cruises-3-days-2-nights',
+                'https://reneacruiseshalong.com/3-days-2-nights-cruise/',
+                'https://senacruises.com/3-days-2-nights-ha-long-bay-tour-with-sena-cruises.html',
+            ],
+        ],
+    ],
+
+];
