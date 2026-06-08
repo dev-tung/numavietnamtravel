@@ -96,6 +96,7 @@ add_action('admin_init', function () {
         exit;
     }
 
+    // ?numa_import=1&limit=20
     if (isset($_GET['numa_import'])) {
 
         $offset = isset($_GET['offset'])
