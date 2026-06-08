@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: mysql:8.0
@@ -21,31 +23,42 @@ services:
   wordpress:
     image: wordpress:latest
     container_name: numavietnamtravel_wp
+
     depends_on:
       - db
+
     ports:
       - "8080:80"
+
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wpuser
       WORDPRESS_DB_PASSWORD: wpuserpass
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_TABLE_PREFIX: wp_
+
     volumes:
       - ./:/var/www/html
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+
     restart: always
 
   wpcli:
     image: wordpress:cli
     container_name: numavietnamtravel_wpcli
+
     depends_on:
       - db
       - wordpress
+
     env_file:
       - .env
+
     volumes:
       - ./:/var/www/html
+
     entrypoint: ["sleep", "infinity"]
+
     restart: "no"
 
 volumes:

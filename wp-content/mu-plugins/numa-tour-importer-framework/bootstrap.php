@@ -3,96 +3,32 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once __DIR__ . '/crawlers/BaseCrawler.php';
+require_once __DIR__ . '/crawlers/WordPressTourCrawler.php';
+require_once __DIR__ . '/crawlers/CruiseCrawler.php';
+require_once __DIR__ . '/crawlers/GenericCrawler.php';
+require_once __DIR__ . '/crawlers/CrawlerFactory.php';
 
-require_once __DIR__ . '/database/migrations.php';
+require_once __DIR__ . '/sources/SourceProvider.php';
+
+require_once __DIR__ . '/services/CrawlService.php';
+
+require_once __DIR__ . '/downloaders/ImageDownloader.php';
+
+require_once __DIR__ . '/woocommerce/ProductCreator.php';
+require_once __DIR__ . '/woocommerce/ProductCategories.php';
+require_once __DIR__ . '/woocommerce/ProductGallery.php';
+require_once __DIR__ . '/woocommerce/ProductMeta.php';
+require_once __DIR__ . '/woocommerce/ProductImporter.php';
 
 add_action('admin_init', function () {
-
     if (!current_user_can('administrator')) {
         return;
     }
 
-    /**
-     * CREATE DATABASE TABLES
-     *
-     * URL:
-     * /wp-admin/?numa_migrate=1
-     *
-     * Example:
-     * http://localhost:8080/wp-admin/?numa_migrate=1
-     */
-    if (isset($_GET['numa_migrate'])) {
-
-        NumaMigrations::migrate();
-
-        wp_die('Migration completed');
-    }
-
-    /**
-     * DROP DATABASE TABLES
-     *
-     * URL:
-     * /wp-admin/?numa_rollback=1
-     *
-     * Example:
-     * http://localhost:8080/wp-admin/?numa_rollback=1
-     */
-    if (isset($_GET['numa_rollback'])) {
-
-        NumaMigrations::rollback();
-
-        wp_die('Rollback completed');
-    }
-
-    /**
-     * CHECK DATABASE STATUS
-     *
-     * URL:
-     * /wp-admin/?numa_status=1
-     *
-     * Example:
-     * http://localhost:8080/wp-admin/?numa_status=1
-     */
-    if (isset($_GET['numa_status'])) {
-
-        global $wpdb;
-
-        $tables = [
-            $wpdb->prefix . 'mu_tour_imports',
-            $wpdb->prefix . 'mu_tour_import_images',
-        ];
-
-        echo '<pre>';
-
-        foreach ($tables as $table) {
-
-            $exists = $wpdb->get_var(
-                $wpdb->prepare(
-                    "SHOW TABLES LIKE %s",
-                    $table
-                )
-            );
-
-            echo $table . ' : ';
-
-            echo $exists
-                ? 'EXISTS'
-                : 'MISSING';
-
-            echo PHP_EOL;
-        }
-
-        echo '</pre>';
-
-        exit;
-    }
-    /**
-     * URL:
-     * /wp-admin/?numa_sources=1
-     */
     if (isset($_GET['numa_sources'])) {
 
-        require_once __DIR__ . '/sources/SourceProvider.php';
+        
 
         echo '<pre>';
 
@@ -105,85 +41,183 @@ add_action('admin_init', function () {
         exit;
     }
 
-    /**
-     * URL:
-     * /wp-admin/?numa_crawl=1
-     */
     if (isset($_GET['numa_crawl'])) {
 
-        require_once __DIR__ . '/sources/SourceProvider.php';
+        $service = new CrawlService();
 
-        require_once __DIR__ . '/crawlers/BaseCrawler.php';
-
-        require_once __DIR__ . '/crawlers/WordPressTourCrawler.php';
-        require_once __DIR__ . '/crawlers/CruiseCrawler.php';
-        require_once __DIR__ . '/crawlers/GenericCrawler.php';
-
-        require_once __DIR__ . '/crawlers/CrawlerFactory.php';
-
-        $sources = SourceProvider::all();
-
-        $isUrlList = function (array $list): bool {
-            if (empty($list)) {
-                return false;
-            }
-
-            foreach ($list as $value) {
-                if (!is_string($value)) {
-                    return false;
-                }
-            }
-
-            return true;
-        };
-
-        $crawlTree = function (array $node, array $path = []) use (&$crawlTree, $isUrlList) {
-            $result = [];
-
-            foreach ($node as $key => $value) {
-                if (is_array($value)) {
-                    if ($isUrlList($value)) {
-                        $result[$key] = [];
-
-                        foreach ($value as $url) {
-                            try {
-                                $crawler = CrawlerFactory::make($url);
-                                $crawler->setSourceData([
-                                    'category_1' => $path[0] ?? '',
-                                    'category_2' => $path[1] ?? '',
-                                    'category_3' => $path[2] ?? '',
-                                    'url' => $url,
-                                ]);
-
-                                $result[$key][] = $crawler->crawl($url);
-                            } catch (Exception $e) {
-                                $result[$key][] = [
-                                    'url' => $url,
-                                    'error' => $e->getMessage(),
-                                ];
-                            }
-                        }
-                    } else {
-                        $result[$key] = $crawlTree($value, array_merge($path, [$key]));
-                    }
-                } else {
-                    $result[$key] = $value;
-                }
-            }
-
-            return $result;
-        };
-
-        $results = $crawlTree($sources);
+        $results = $service->getResults();
 
         echo '<pre>';
-
         print_r($results);
-
         echo '</pre>';
 
         exit;
     }
 
+    if (isset($_GET['numa_export'])) {
 
+        
+        $service = new CrawlService();
+
+        $results = $service->getResults();
+
+        $storageDir = __DIR__ . '/storage';
+
+        $jsonDir  = $storageDir . '/json';
+        $imageDir = $storageDir . '/images';
+
+        if (!is_dir($jsonDir)) {
+            mkdir($jsonDir, 0755, true);
+        }
+
+        if (!is_dir($imageDir)) {
+            mkdir($imageDir, 0755, true);
+        }
+
+        $downloader = new ImageDownloader();
+
+        $downloader->downloadImagesRecursively(
+            $results,
+            $imageDir
+        );
+
+        file_put_contents(
+            $jsonDir . '/tours.json',
+            json_encode(
+                $results,
+                JSON_PRETTY_PRINT |
+                JSON_UNESCAPED_UNICODE |
+                JSON_UNESCAPED_SLASHES
+            )
+        );
+
+        echo 'Export completed';
+
+        exit;
+    }
+
+    if (isset($_GET['numa_import'])) {
+
+        $offset = isset($_GET['offset'])
+            ? (int) $_GET['offset']
+            : 0;
+
+        $limit = isset($_GET['limit'])
+            ? (int) $_GET['limit']
+            : 20;
+
+        $importer = new ProductImporter();
+
+        $importer->import(
+            $limit,
+            $offset
+        );
+
+        exit;
+    }
+
+    if (isset($_GET['numa_cleanup'])) {
+
+        if (!current_user_can('administrator')) {
+            wp_die('Permission denied');
+        }
+
+        // Xóa tất cả products
+        $products = get_posts([
+            'post_type'      => 'product',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        ]);
+
+        foreach ($products as $productId) {
+
+            // Ảnh gallery
+            $galleryIds = get_post_meta(
+                $productId,
+                '_product_image_gallery',
+                true
+            );
+
+            if (!empty($galleryIds)) {
+
+                foreach (explode(',', $galleryIds) as $attachmentId) {
+
+                    wp_delete_attachment(
+                        (int) $attachmentId,
+                        true
+                    );
+                }
+            }
+
+            // Ảnh đại diện
+            $thumbnailId = get_post_thumbnail_id(
+                $productId
+            );
+
+            if ($thumbnailId) {
+
+                wp_delete_attachment(
+                    $thumbnailId,
+                    true
+                );
+            }
+
+            // Ảnh đính kèm khác
+            $attachments = get_attached_media(
+                '',
+                $productId
+            );
+
+            foreach ($attachments as $attachment) {
+
+                wp_delete_attachment(
+                    $attachment->ID,
+                    true
+                );
+            }
+
+            // Xóa product
+            wp_delete_post(
+                $productId,
+                true
+            );
+        }
+
+        // Xóa tất cả product categories
+        $terms = get_terms([
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => false,
+        ]);
+
+        foreach ($terms as $term) {
+
+            // Không xóa category mặc định "Uncategorized"
+            if ($term->slug === 'uncategorized') {
+                continue;
+            }
+
+            wp_delete_term(
+                $term->term_id,
+                'product_cat'
+            );
+        }
+
+        // Xóa product tags
+        $tags = get_terms([
+            'taxonomy'   => 'product_tag',
+            'hide_empty' => false,
+        ]);
+
+        foreach ($tags as $tag) {
+
+            wp_delete_term(
+                $tag->term_id,
+                'product_tag'
+            );
+        }
+
+        echo 'Products, categories, tags and images deleted successfully';
+
+        exit;
+    }
 });

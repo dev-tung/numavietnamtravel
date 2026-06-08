@@ -151,27 +151,283 @@ abstract class BaseCrawler
         return trim(preg_replace('/\s+/', ' ', html_entity_decode($text, ENT_QUOTES, 'UTF-8')));
     }
 
-    protected function extractImages(DOMXPath $xpath): array
-    {
-        $nodes = $xpath->query("//img[@src]");
-        $images = [];
 
-        foreach ($nodes as $node) {
-            $src = $node->getAttribute('src');
+protected function extractImages(DOMXPath $xpath): array
+{
+    $images = [];
 
-            if (!$src) {
+    $nodes = $xpath->query("
+        //article//img |
+        //div[contains(@class,'content')]//img |
+        //div[contains(@class,'post')]//img |
+        //div[contains(@class,'entry')]//img |
+        //div[contains(@class,'single')]//img |
+        //div[contains(@class,'swiper')]//img |
+        //div[contains(@class,'slick')]//img |
+        //div[contains(@class,'gallery')]//img |
+        //img
+    ");
+
+    foreach ($nodes as $node) {
+
+        $attrs = [
+            'data-src',
+            'data-original',
+            'data-lazy',
+            'data-url',
+            'data-lazy-src',
+            'data-flickity-lazyload',
+            'data-image',
+            'data-thumb',
+            'src'
+        ];
+
+        $src = '';
+
+        foreach ($attrs as $attr) {
+
+            $value = trim($node->getAttribute($attr));
+
+            if (!$value) {
                 continue;
             }
 
-            if (str_contains($src, 'logo') || str_contains($src, 'icon') || str_contains($src, 'sprite')) {
+            // bỏ placeholder lazyload
+            if (
+                str_starts_with($value, 'data:image') ||
+                str_contains($value, 'svg+xml')
+            ) {
                 continue;
             }
 
-            $images[] = $src;
+            $src = $value;
+            break;
         }
 
-        return array_values(array_unique($images));
+        if (!$src) {
+            continue;
+        }
+
+        $src = $this->normalizeImageUrl($src);
+
+        if (!$src) {
+            continue;
+        }
+
+        if (!$this->isValidImage($src)) {
+            continue;
+        }
+
+        $images[] = $src;
     }
+
+    return array_values(array_unique($images));
+}
+
+private function normalizeImageUrl(string $url): ?string
+{
+    $url = trim(html_entity_decode($url));
+
+    if (!$url) {
+        return null;
+    }
+
+    if (str_starts_with($url, 'data:')) {
+        return null;
+    }
+
+    // srcset
+    if (str_contains($url, ',')) {
+        $parts = explode(',', $url);
+        $url = trim(explode(' ', trim($parts[0]))[0]);
+    }
+
+    // protocol-relative
+    if (str_starts_with($url, '//')) {
+        return 'https:' . $url;
+    }
+
+    // absolute URL
+    if (preg_match('#^https?://#i', $url)) {
+        return $url;
+    }
+
+    $base = rtrim($this->getSourceDomain(), '/');
+
+    if (!$base) {
+        return $url;
+    }
+
+    // /img/a.jpg
+    if (str_starts_with($url, '/')) {
+        return $base . $url;
+    }
+
+    // img/a.jpg
+    return $base . '/' . ltrim($url, '/');
+}
+
+private function isValidImage(string $url): bool
+{
+    $url = strtolower(trim($url));
+
+    if (!$url) {
+        return false;
+    }
+
+    if (str_starts_with($url, 'data:')) {
+        return false;
+    }
+
+    if (
+        str_contains($url, 'pixel') ||
+        str_contains($url, 'tracking') ||
+        str_contains($url, 'google-analytics')
+    ) {
+        return false;
+    }
+
+$blocked = [
+    // system
+    'favicon',
+    'ajax-loader',
+    'spinner',
+    'loading',
+    'placeholder',
+    'tracking',
+    'pixel',
+    'analytics',
+
+    // logo / branding
+    'logo',
+    'brand',
+    'vector',
+    'union',
+
+    // navigation
+    'menu',
+    'close',
+    'search',
+    'search-icon',
+    'previous',
+    'next',
+    'arrow',
+    'back',
+    'forward',
+
+    // icon
+    'icon',
+    'icons',
+    'round-icons',
+
+    // social
+    'social',
+    'facebook',
+    'instagram',
+    'youtube',
+    'twitter',
+    'linkedin',
+    'pinterest',
+    'telegram',
+    'zalo',
+    'tiktok',
+
+    // payment
+    'payment',
+    'paypal',
+    'visa',
+    'mastercard',
+    'amex',
+    'jcb',
+    'bank',
+
+    // language
+    '/en.',
+    '/vn.',
+    '_en.',
+    '_vn.',
+    '-en.',
+    '-vn.',
+    '/en/',
+    '/vn/',
+
+    // flags
+    'flag',
+    'flags',
+
+    // common facility icons
+    'bed.',
+    'bed-',
+    'fork.',
+    'knife',
+    'house.',
+    'terrace',
+    'music.',
+    'mic.',
+    'star.',
+    'circle',
+    'roundtrip',
+    'sightseeing-fee',
+    'onboard',
+
+    // theme assets
+    '/themes/',
+    '/theme/',
+    '/assets/',
+    '/header/',
+    '/footer/',
+
+    'thumb',
+    'thumbnail',
+    'email',
+    'tel',
+    '120x120',
+    '300x200',
+    '150x150',
+    '80x80',
+    'map',
+    'qr-img'
+];
+
+    foreach ($blocked as $word) {
+        if (str_contains($url, $word)) {
+            return false;
+        }
+    }
+
+    $path = strtolower(parse_url($url, PHP_URL_PATH) ?? '');
+
+    $filename = basename($path);
+
+    if (
+        str_contains($filename, 'thumb') ||
+        str_contains($filename, 'thumbnail')
+    ) {
+        return false;
+    }
+
+
+    return true;
+}
+
+private function getSourceDomain(): string
+{
+    if (!property_exists($this, 'url') || empty($this->url)) {
+        return '';
+    }
+
+    $parts = parse_url($this->url);
+
+    if (
+        empty($parts['scheme']) ||
+        empty($parts['host'])
+    ) {
+        return '';
+    }
+
+    return $parts['scheme'] . '://' . $parts['host'];
+}
+
 
     /**
      * Try a list of XPath queries and parse the first block that yields
