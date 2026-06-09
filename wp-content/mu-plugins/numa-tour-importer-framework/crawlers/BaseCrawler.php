@@ -386,7 +386,11 @@ $blocked = [
     '150x150',
     '80x80',
     'map',
-    'qr-img'
+    'qr-img',
+    'whatsapp',
+    '100x100',
+    'phone',
+    'ico11'
 ];
 
     foreach ($blocked as $word) {

@@ -290,21 +290,42 @@ MODAL GALLERY
     <!-- Breadcrumb -->
     <nav class="small text-muted mb-3">
 
-      <a href="#" class="text-decoration-none text-muted">
-        Home
-      </a>
+        <a href="<?php echo esc_url(home_url('/')); ?>"
+          class="text-decoration-none text-muted">
+            Home
+        </a>
 
-      <span class="mx-2">›</span>
+        <span class="mx-2">›</span>
 
-      <a href="#" class="text-decoration-none text-muted">
-        Tours
-      </a>
+        <?php
+        $terms = get_the_terms(
+            get_the_ID(),
+            'product_cat'
+        );
 
-      <span class="mx-2">›</span>
+        if ($terms && !is_wp_error($terms)) :
 
-      <span>
-        Tour Detail
-      </span>
+            $term = reset($terms);
+        ?>
+
+            <a href="<?php echo esc_url(
+                get_term_link($term)
+            ); ?>"
+              class="text-decoration-none text-muted">
+
+                <?php echo esc_html(
+                    $term->name
+                ); ?>
+
+            </a>
+
+            <span class="mx-2">›</span>
+
+        <?php endif; ?>
+
+        <span>
+            <?php the_title(); ?>
+        </span>
 
     </nav>
 
@@ -314,7 +335,7 @@ MODAL GALLERY
       <div>
 
         <h1 class="fw-bold mb-3">
-          Ha Noi – Ha Long – Ninh Binh 3D2N
+            <?php the_title(); ?>
         </h1>
 
         <div class="d-flex flex-wrap gap-4 text-muted small">
@@ -395,7 +416,24 @@ MODAL GALLERY
 
       <!-- LEFT -->
       <div class="col-12 col-xl-8">
+        <?php
 
+          $wc_product = wc_get_product(get_the_ID());
+
+          if (!$wc_product) {
+              return;
+          }
+
+          $gallery_ids = $wc_product->get_gallery_image_ids();
+
+          if ($wc_product->get_image_id()) {
+              array_unshift(
+                  $gallery_ids,
+                  $wc_product->get_image_id()
+              );
+          }
+
+        ?>
         <!-- Gallery -->
         <div class="border rounded-1 overflow-hidden mb-3 bg-white">
 
@@ -404,21 +442,19 @@ MODAL GALLERY
 
             <div class="TourGallery__main">
 
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
-                   class="TourGallery__image active"
-                   alt="Tour">
+                <?php foreach ($gallery_ids as $index => $image_id) : ?>
 
-              <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1400&q=80"
-                   class="TourGallery__image"
-                   alt="Tour">
+                    <img
+                        src="<?php echo esc_url(
+                            wp_get_attachment_image_url(
+                                $image_id,
+                                'full'
+                            )
+                        ); ?>"
+                        class="TourGallery__image <?php echo $index === 0 ? 'active' : ''; ?>"
+                        alt="<?php echo esc_attr(get_the_title()); ?>">
 
-              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80"
-                   class="TourGallery__image"
-                   alt="Tour">
-
-              <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1400&q=80"
-                   class="TourGallery__image"
-                   alt="Tour">
+                <?php endforeach; ?>
 
             </div>
 
@@ -457,7 +493,7 @@ MODAL GALLERY
             </button>
 
             <button class="btn btn-dark position-absolute bottom-0 end-0 m-3 small rounded-1 px-3 py-2">
-              View all photos (18)
+              View all photos (<?php echo count($gallery_ids); ?>)
             </button>
 
           </div>
@@ -465,21 +501,19 @@ MODAL GALLERY
           <!-- Thumbs -->
           <div class="TourGallery__thumbs p-3">
 
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-                 class="TourGallery__thumb active"
-                 alt="Thumb">
+              <?php foreach ($gallery_ids as $index => $image_id) : ?>
 
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80"
-                 class="TourGallery__thumb"
-                 alt="Thumb">
+                  <img
+                      src="<?php echo esc_url(
+                          wp_get_attachment_image_url(
+                              $image_id,
+                              'medium'
+                          )
+                      ); ?>"
+                      class="TourGallery__thumb <?php echo $index === 0 ? 'active' : ''; ?>"
+                      alt="<?php echo esc_attr(get_the_title()); ?>">
 
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-                 class="TourGallery__thumb"
-                 alt="Thumb">
-
-            <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=600&q=80"
-                 class="TourGallery__thumb"
-                 alt="Thumb">
+              <?php endforeach; ?>
 
           </div>
 
@@ -488,7 +522,30 @@ MODAL GALLERY
         <!-- =========================================
         TABS
         ========================================= -->
+        <?php
 
+        $product_id = get_the_ID();
+
+        $wc_product = wc_get_product($product_id);
+
+        /**
+         * ACF Fields
+         */
+        $overview      = get_field('tour_overview', $product_id);
+        $itinerary     = get_field('tour_itinerary', $product_id);
+        $duration      = get_field('tour_duration', $product_id);
+        $departure     = get_field('tour_departure', $product_id);
+        $transport     = get_field('tour_transport', $product_id);
+        $accommodation = get_field('tour_accommodation', $product_id);
+        $map_embed     = get_field('tour_map', $product_id);
+
+        /**
+         * Fallback nếu chưa có dữ liệu ACF
+         */
+        $overview = $overview ?: $wc_product?->get_short_description();
+
+        ?>
+        
         <div class="border rounded-1 bg-white TourTabs">
 
           <!-- Nav -->
@@ -539,10 +596,19 @@ MODAL GALLERY
             <div class="TourTabPane active"
                 id="tab-info">
 
-              <p class="text-muted mb-4">
-                This 3 days 2 nights journey takes you to the most beautiful destinations in Northern Vietnam:
-                Ha Long Bay, Ninh Binh ancient capital, and unique cultural experiences.
-              </p>
+              <div class="text-muted mb-4">
+
+                <?php
+
+                if (!empty($overview)) {
+                    echo wpautop(wp_kses_post($overview));
+                } elseif ($wc_product) {
+                    echo wpautop($wc_product->get_short_description());
+                }
+
+                ?>
+
+              </div>
 
               <!-- Highlight -->
               <div class="row row-cols-2 row-cols-lg-4 g-3 mb-5">
@@ -606,44 +672,7 @@ MODAL GALLERY
 
               <div class="d-flex flex-column gap-4">
 
-                <div class="border rounded-1 p-4">
-
-                  <div class="fw-bold mb-2">
-                    Day 1: Ha Noi → Ha Long
-                  </div>
-
-                  <p class="text-muted mb-0">
-                    Pick up at hotel, transfer to Ha Long Bay,
-                    cruise experience and overnight stay.
-                  </p>
-
-                </div>
-
-                <div class="border rounded-1 p-4">
-
-                  <div class="fw-bold mb-2">
-                    Day 2: Ha Long → Ninh Binh
-                  </div>
-
-                  <p class="text-muted mb-0">
-                    Visit caves, transfer to Ninh Binh,
-                    discover Trang An and Hoa Lu ancient capital.
-                  </p>
-
-                </div>
-
-                <div class="border rounded-1 p-4">
-
-                  <div class="fw-bold mb-2">
-                    Day 3: Ninh Binh → Ha Noi
-                  </div>
-
-                  <p class="text-muted mb-0">
-                    Free morning activities, local specialties,
-                    return to Ha Noi city center.
-                  </p>
-
-                </div>
+                <?php echo wp_kses_post($itinerary); ?>
 
               </div>
 
