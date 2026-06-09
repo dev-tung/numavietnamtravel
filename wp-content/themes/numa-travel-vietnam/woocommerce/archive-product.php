@@ -1,18 +1,85 @@
 <?php get_header(); ?>
+<style>
+/* CARD luôn đều nhau */
+.d-flex.flex-column.gap-4 article.card {
+  height: 100%;
+}
 
+/* IMAGE luôn đồng đều */
+.card .col-md-4 {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.card .col-md-4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* TITLE + TEXT không làm vỡ card */
+.card h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* đảm bảo bottom luôn xuống đáy */
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card .mt-auto {
+  margin-top: auto !important;
+}
+</style>
 <main class="container p-3">
 
   <div class="bg-white rounded-1 shadow-sm p-4">
 
     <!-- Breadcrumb -->
-    <nav class="mb-3 small text-muted">
-      <a href="#" class="text-decoration-none text-muted">
-        Home
-      </a>
+    <nav class="small text-muted mb-3">
 
-      <span class="mx-2">›</span>
+        <a href="<?php echo esc_url(home_url('/')); ?>"
+          class="text-decoration-none text-muted">
+            Home
+        </a>
 
-      <span>Tours</span>
+        <?php
+        // Lấy category hiện tại nếu đang ở trang taxonomy product_cat
+        if (is_product_category()) :
+
+            $term = get_queried_object();
+        ?>
+
+            <span class="mx-2">›</span>
+
+            <a href="<?php echo esc_url(get_term_link($term)); ?>"
+              class="text-decoration-none text-muted">
+
+                <?php echo esc_html($term->name); ?>
+
+            </a>
+
+        <?php elseif (is_shop()) : ?>
+
+            <span class="mx-2">›</span>
+
+            <span>Shop</span>
+
+        <?php endif; ?>
+
     </nav>
 
     <!-- Heading -->
@@ -62,32 +129,36 @@
               Search
             </label>
 
-            <div class="input-group">
+            <form method="get">
 
-              <input type="text"
-                     class="form-control border-end-0 rounded-start-3"
-                     placeholder="Enter tour name, destination...">
+              <div class="input-group">
 
-              <span class="input-group-text bg-white border-start-0 rounded-end-3">
+                <input type="text"
+                      name="s"
+                      value="<?php echo get_search_query(); ?>"
+                      class="form-control border-end-0 rounded-start-3"
+                      placeholder="Enter tour name, destination...">
 
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="18"
-                     height="18"
-                     fill="currentColor"
-                     class="bi bi-search text-muted"
-                     viewBox="0 0 16 16">
+                <span class="input-group-text bg-white border-start-0 rounded-end-3">
 
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 
-                  1.398h-.001q.044.06.098.115l3.85 
-                  3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 
-                  1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 
-                  1-11 0 5.5 5.5 0 0 1 11 0"/>
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      class="bi bi-search text-muted"
+                      viewBox="0 0 16 16">
 
-                </svg>
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 
+                    1.398h-.001q.044.06.098.115l3.85 
+                    3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 
+                    1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 
+                    1-11 0 5.5 5.5 0 0 1 11 0"/>
 
-              </span>
+                  </svg>
 
-            </div>
+                </span>
+
+              </div>
 
           </div>
 
@@ -100,41 +171,48 @@
 
             <div class="d-flex flex-column gap-3 small">
 
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="tour1">
-                <label class="form-check-label" for="tour1">
-                  Group Tours
-                </label>
-              </div>
+              <?php
+              $terms = get_terms([
+                'taxonomy' => 'product_cat',
+                'hide_empty' => true,
+              ]);
+
+              $selected = isset($_GET['product_cat']) ? (array) $_GET['product_cat'] : [];
+
+              if (!empty($terms) && !is_wp_error($terms)) :
+                foreach ($terms as $term) :
+              ?>
 
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="tour2">
-                <label class="form-check-label" for="tour2">
-                  Private Tours
+
+                <input class="form-check-input"
+                      type="checkbox"
+                      name="product_cat[]"
+                      value="<?php echo esc_attr($term->slug); ?>"
+                      id="cat-<?php echo esc_attr($term->term_id); ?>"
+                      <?php checked(in_array($term->slug, $selected)); ?>>
+
+                <label class="form-check-label"
+                      for="cat-<?php echo esc_attr($term->term_id); ?>">
+                  <?php echo esc_html($term->name); ?>
                 </label>
+
               </div>
 
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="tour3">
-                <label class="form-check-label" for="tour3">
-                  Domestic Tours
-                </label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="tour4">
-                <label class="form-check-label" for="tour4">
-                  International Tours
-                </label>
-              </div>
+              <?php
+                endforeach;
+              endif;
+              ?>
 
             </div>
 
           </div>
 
-          <button class="btn btn-dark w-100 rounded-1">
+          <button type="submit" class="btn btn-dark w-100 rounded-1">
             Clear Filters
           </button>
+
+            </form>
 
         </div>
 
@@ -145,161 +223,181 @@
 
         <div class="mb-4">
           <p class="text-muted small mb-0">
-            Showing 1 - 5 of 24 tours
+            <?php
+              global $wp_query;
+              $count = $wp_query->found_posts;
+              $paged = max(1, get_query_var('paged'));
+              $per_page = get_query_var('posts_per_page') ?: 5;
+
+              $from = ($paged - 1) * $per_page + 1;
+              $to = min($paged * $per_page, $count);
+
+              echo "Showing {$from} - {$to} of {$count} tours";
+            ?>
           </p>
         </div>
 
         <!-- Tour List -->
         <div class="d-flex flex-column gap-4">
 
-          <?php for($i = 1; $i <= 5; $i++) : ?>
+          <?php if (woocommerce_product_loop()) : ?>
+          <?php while (have_posts()) : the_post(); global $product; ?>
 
-          <article class="card border shadow-sm rounded-1 overflow-hidden h-100">
+            <article class="card border shadow-sm rounded-1 overflow-hidden h-100">
 
-            <div class="row g-0 h-100">
+              <div class="row g-0 h-100">
 
-              <!-- Image -->
-              <div class="col-md-4 position-relative">
+                <!-- Image -->
+                <div class="col-md-4 position-relative">
 
-                <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
-                  Featured
-                </span>
+                  <?php if ($product->is_featured()) : ?>
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
+                      Featured
+                    </span>
+                  <?php endif; ?>
 
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-                     class="img-fluid w-100 h-100 object-fit-cover"
-                     alt="Tour">
+                  <a href="<?php the_permalink(); ?>">
+                    <?php echo get_the_post_thumbnail(get_the_ID(), 'large', [
+                      'class' => 'img-fluid w-100 h-100 object-fit-cover',
+                      'alt'   => get_the_title()
+                    ]); ?>
+                  </a>
 
-              </div>
+                </div>
 
-              <!-- Content -->
-              <div class="col-md-8">
+                <!-- Content -->
+                <div class="col-md-8">
 
-                <div class="card-body p-4 h-100 d-flex flex-column">
+                  <div class="card-body p-4 h-100 d-flex flex-column">
 
-                  <div>
+                    <div>
 
-                    <h3 class="h4 fw-bold mb-3">
-                      Tour <?= $i ?>: Hanoi – Ha Long – Ninh Binh 3D2N
-                    </h3>
+                      <h3 class="h4 fw-bold mb-3">
+                        <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                          <?php the_title(); ?>
+                        </a>
+                      </h3>
 
-                    <!-- Meta -->
-                    <div class="d-flex flex-wrap gap-4 text-muted small mb-3">
+                      <!-- Meta -->
+                      <div class="d-flex flex-wrap gap-4 text-muted small mb-3">
 
-                      <span class="d-flex align-items-center gap-2">
+                        <span class="d-flex align-items-center gap-2">
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-clock"
-                             viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-clock"
+                              viewBox="0 0 16 16">
 
-                          <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
-                          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
+                            <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
 
-                        </svg>
+                          </svg>
 
-                        3 Days 2 Nights
+                          <?php
+                            echo get_post_meta(get_the_ID(), '_duration', true) ?: '3 Days 2 Nights';
+                          ?>
 
-                      </span>
+                        </span>
 
-                      <span class="d-flex align-items-center gap-2">
+                        <span class="d-flex align-items-center gap-2">
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-calendar-event"
-                             viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-calendar-event"
+                              viewBox="0 0 16 16">
 
-                          <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
-                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
+                            <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
 
-                        </svg>
+                          </svg>
 
-                        Departure: Daily
+                          Departure: <?php echo get_post_meta(get_the_ID(), '_departure', true) ?: 'Daily'; ?>
 
-                      </span>
+                        </span>
+
+                      </div>
+
+                      <p class="text-muted mb-4">
+                        <?php echo wp_trim_words(get_the_excerpt(), 25); ?>
+                      </p>
+
+                      <!-- Features -->
+                      <div class="d-flex flex-wrap gap-4 text-muted small mb-4">
+
+                        <span class="d-flex align-items-center gap-2">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-bus-front"
+                              viewBox="0 0 16 16">
+
+                            <path d="M4 0a2 2 0 0 0-2 2v9a2 2 0 0 0 1 1.732V14a1 1 0 0 0 2 0v-1h6v1a1 1 0 1 0 2 0v-1.268A2 2 0 0 0 14 11V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v4H3V2a1 1 0 0 1 1-1z"/>
+                            <path d="M3 7h10v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7zm1.5 3a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm7 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+
+                          </svg>
+
+                          Tourist Bus
+
+                        </span>
+
+                        <span class="d-flex align-items-center gap-2">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-building"
+                              viewBox="0 0 16 16">
+
+                            <path d="M6.5 15V1h3v14h5V0H1v15h5zm1-13h1v1h-1V2zm0 2h1v1h-1V4zm0 2h1v1h-1V6zm0 2h1v1h-1V8z"/>
+
+                          </svg>
+
+                          3-4 Star Hotel
+
+                        </span>
+
+                        <span class="d-flex align-items-center gap-2">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-cup-hot"
+                              viewBox="0 0 16 16">
+
+                            <path d="M2 2h11v5a4 4 0 0 1-8 0V2z"/>
+                            <path d="M0 13h14v1H0z"/>
+
+                          </svg>
+
+                          Meals Included
+
+                        </span>
+
+                      </div>
 
                     </div>
 
-                    <p class="text-muted mb-4">
-                      Explore the breathtaking beauty of Ha Long Bay,
-                      the ancient capital Hoa Lu in Ninh Binh,
-                      and the unique cultural charm of Northern Vietnam.
-                    </p>
+                    <!-- Bottom -->
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
 
-                    <!-- Features -->
-                    <div class="d-flex flex-wrap gap-4 text-muted small mb-4">
+                      <div class="fw-bold fs-3">
+                        2,990,000 VND
+                      </div>
 
-                      <span class="d-flex align-items-center gap-2">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-bus-front"
-                             viewBox="0 0 16 16">
-
-                          <path d="M4 0a2 2 0 0 0-2 2v9a2 2 0 0 0 1 1.732V14a1 1 0 0 0 2 0v-1h6v1a1 1 0 1 0 2 0v-1.268A2 2 0 0 0 14 11V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v4H3V2a1 1 0 0 1 1-1z"/>
-                          <path d="M3 7h10v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7zm1.5 3a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm7 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-
-                        </svg>
-
-                        Tourist Bus
-
-                      </span>
-
-                      <span class="d-flex align-items-center gap-2">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-building"
-                             viewBox="0 0 16 16">
-
-                          <path d="M6.5 15V1h3v14h5V0H1v15h5zm1-13h1v1h-1V2zm0 2h1v1h-1V4zm0 2h1v1h-1V6zm0 2h1v1h-1V8z"/>
-
-                        </svg>
-
-                        3-4 Star Hotel
-
-                      </span>
-
-                      <span class="d-flex align-items-center gap-2">
-
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-cup-hot"
-                             viewBox="0 0 16 16">
-
-                          <path d="M2 2h11v5a4 4 0 0 1-8 0V2z"/>
-                          <path d="M0 13h14v1H0z"/>
-
-                        </svg>
-
-                        Meals Included
-
-                      </span>
+                      <a href="<?php the_permalink(); ?>"
+                        class="btn btn-outline-primary rounded-1 px-4">
+                        View Details
+                      </a>
 
                     </div>
-
-                  </div>
-
-                  <!-- Bottom -->
-                  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
-
-                    <div class="fw-bold fs-3">
-                      2,990,000 VND
-                    </div>
-
-                    <a href="#"
-                       class="btn btn-outline-primary rounded-1 px-4">
-                      View Details
-                    </a>
 
                   </div>
 
@@ -307,41 +405,27 @@
 
               </div>
 
-            </div>
+            </article>
 
-          </article>
+          <?php endwhile; ?>
+          <?php else : ?>
 
-          <?php endfor; ?>
+            <p class="text-muted">No tours found.</p>
+
+          <?php endif; ?>
 
         </div>
 
         <!-- Pagination -->
         <nav class="mt-5">
-
-          <ul class="pagination justify-content-center">
-
-            <li class="page-item">
-              <a class="page-link rounded-1 mx-1" href="#">‹</a>
-            </li>
-
-            <li class="page-item active">
-              <a class="page-link rounded-1 mx-1" href="#">1</a>
-            </li>
-
-            <li class="page-item">
-              <a class="page-link rounded-1 mx-1" href="#">2</a>
-            </li>
-
-            <li class="page-item">
-              <a class="page-link rounded-1 mx-1" href="#">3</a>
-            </li>
-
-            <li class="page-item">
-              <a class="page-link rounded-1 mx-1" href="#">›</a>
-            </li>
-
-          </ul>
-
+          <?php
+            echo paginate_links([
+              'type'      => 'list',
+              'prev_text' => '‹',
+              'next_text' => '›',
+              'mid_size'  => 2,
+            ]);
+          ?>
         </nav>
 
       </div>

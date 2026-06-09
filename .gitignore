@@ -3,3 +3,9 @@ db_data/
 vendor/
 node_modules/
 *.log
+
+# WordPress uploads
+wp-content/uploads/
+
+# Nếu có thư mục ảnh riêng
+wp-content/uploads/**
