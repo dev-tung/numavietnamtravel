@@ -88,23 +88,50 @@
       <div>
 
         <h1 class="fw-bold mb-2">
-          Tour List
+          <?php woocommerce_page_title(); ?>
         </h1>
 
         <p class="text-muted mb-0">
-          Discover exciting travel tours specially designed for you
+          <?php
+            global $wp_query;
+            $count = $wp_query->found_posts;
+            echo "Discover exciting travel tours specially designed for you ({$count} tours)";
+          ?>
         </p>
 
       </div>
 
       <div>
 
-        <select class="form-select rounded-1 shadow-sm">
-          <option>Sort by: Latest</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Featured Tours</option>
-        </select>
+        <form method="get">
+
+          <select class="form-select rounded-1 shadow-sm"
+                  name="orderby"
+                  onchange="this.form.submit()">
+
+            <?php
+              $orderby = isset($_GET['orderby']) ? $_GET['orderby'] : 'date';
+            ?>
+
+            <option value="date" <?php selected($orderby, 'date'); ?>>
+              Sort by: Latest
+            </option>
+
+            <option value="price" <?php selected($orderby, 'price'); ?>>
+              Price: Low to High
+            </option>
+
+            <option value="price-desc" <?php selected($orderby, 'price-desc'); ?>>
+              Price: High to Low
+            </option>
+
+            <option value="featured" <?php selected($orderby, 'featured'); ?>>
+              Featured Tours
+            </option>
+
+          </select>
+
+        </form>
 
       </div>
 
