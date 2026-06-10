@@ -469,16 +469,42 @@
         </div>
 
         <!-- Pagination -->
+        <?php
+        $links = paginate_links([
+            'type'      => 'array',
+            'prev_text' => '&laquo;',
+            'next_text' => '&raquo;',
+            'mid_size'  => 2,
+        ]);
+
+        if ($links) :
+        ?>
+
         <nav class="mt-5">
-          <?php
-            echo paginate_links([
-              'type'      => 'list',
-              'prev_text' => '‹',
-              'next_text' => '›',
-              'mid_size'  => 2,
-            ]);
-          ?>
+
+            <ul class="pagination justify-content-center">
+
+                <?php foreach ($links as $link) : ?>
+
+                    <li class="page-item">
+
+                        <?php
+                        echo str_replace(
+                            'page-numbers',
+                            'page-link',
+                            $link
+                        );
+                        ?>
+
+                    </li>
+
+                <?php endforeach; ?>
+
+            </ul>
+
         </nav>
+
+        <?php endif; ?>
 
       </div>
 

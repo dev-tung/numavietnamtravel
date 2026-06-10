@@ -506,22 +506,42 @@
 
             <!-- PAGINATION -->
 
+            <?php
+            $links = paginate_links([
+                'total'     => $blogQuery->max_num_pages,
+                'current'   => $paged,
+                'mid_size'  => 2,
+                'prev_text' => '&laquo;',
+                'next_text' => '&raquo;',
+                'type'      => 'array',
+            ]);
+
+            if ($links) :
+            ?>
+
             <nav class="mt-5">
 
-                <?php
+                <ul class="pagination justify-content-center">
 
-                echo paginate_links([
-                    'total'     => $blogQuery->max_num_pages,
-                    'current'   => $paged,
-                    'mid_size'  => 2,
-                    'prev_text' => '‹',
-                    'next_text' => '›',
-                    'type'      => 'list',
-                ]);
+                    <?php foreach ($links as $link) : ?>
 
-                ?>
+                        <li class="page-item <?php echo strpos($link, 'current') !== false ? 'active' : ''; ?>">
+
+                            <?php echo str_replace(
+                                'page-numbers',
+                                'page-link',
+                                $link
+                            ); ?>
+
+                        </li>
+
+                    <?php endforeach; ?>
+
+                </ul>
 
             </nav>
+
+            <?php endif; ?>
 
         </div>
 
