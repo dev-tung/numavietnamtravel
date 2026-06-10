@@ -165,8 +165,11 @@
         $currentSearch = $_GET['s'] ?? '';
         $currentCat    = $_GET['cat'] ?? '';
 
+        $uncategorized = get_category_by_slug('uncategorized');
+
         $categories = get_categories([
-            'hide_empty' => true
+            'hide_empty' => true,
+            'exclude'    => $uncategorized ? [$uncategorized->term_id] : []
         ]);
 
         ?>

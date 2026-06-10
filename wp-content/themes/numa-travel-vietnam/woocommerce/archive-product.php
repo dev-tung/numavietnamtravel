@@ -143,105 +143,190 @@
       <!-- Sidebar -->
       <div class="col-12 col-lg-3">
 
-        <div class="border rounded-1 p-4 h-100">
+          <div class="border rounded-1 p-4 h-100">
 
-          <h5 class="fw-bold mb-4">
-            SEARCH FILTERS
-          </h5>
+              <h5 class="fw-bold mb-4">
+                  SEARCH FILTERS
+              </h5>
 
-          <!-- Search -->
-          <div class="mb-4">
+              <form method="get"
+                    action="<?php echo esc_url(wc_get_page_permalink('shop')); ?>">
 
-            <label class="form-label fw-semibold small">
-              Search
-            </label>
+                  <!-- Search -->
+                  <div class="mb-4">
 
-            <form method="get">
+                      <label class="form-label fw-semibold small">
+                          Search
+                      </label>
 
-              <div class="input-group">
+                      <div class="input-group">
 
-                <input type="text"
-                      name="s"
-                      value="<?php echo get_search_query(); ?>"
-                      class="form-control border-end-0 rounded-start-3"
-                      placeholder="Enter tour name, destination...">
+                          <input type="text"
+                                name="s"
+                                value="<?php echo esc_attr(get_search_query()); ?>"
+                                class="form-control border-end-0 rounded-start-3"
+                                placeholder="Enter tour name, destination...">
 
-                <span class="input-group-text bg-white border-start-0 rounded-end-3">
+                          <span class="input-group-text bg-white border-start-0 rounded-end-3">
 
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      fill="currentColor"
-                      class="bi bi-search text-muted"
-                      viewBox="0 0 16 16">
+                              <svg xmlns="http://www.w3.org/2000/svg"
+                                  width="18"
+                                  height="18"
+                                  fill="currentColor"
+                                  class="bi bi-search text-muted"
+                                  viewBox="0 0 16 16">
 
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 
-                    1.398h-.001q.044.06.098.115l3.85 
-                    3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 
-                    1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 
-                    1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397
+                                  1.398h-.001q.044.06.098.115l3.85
+                                  3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1
+                                  1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1
+                                  1-11 0 5.5 5.5 0 0 1 11 0"/>
 
-                  </svg>
+                              </svg>
 
-                </span>
+                          </span>
 
-              </div>
+                      </div>
+
+                  </div>
+
+                  <!-- Category -->
+                  <div class="mb-4">
+
+                      <label class="form-label fw-semibold small">
+                          Tour Categories
+                      </label>
+
+                      <div class="d-flex flex-column gap-2 small">
+
+                          <?php
+
+                          $selected = isset($_GET['product_cat'])
+                              ? (array) $_GET['product_cat']
+                              : [];
+
+                          $uncategorized = get_term_by(
+                              'slug',
+                              'uncategorized',
+                              'product_cat'
+                          );
+
+                          $exclude_ids = [];
+
+                          if ($uncategorized) {
+                              $exclude_ids[] = $uncategorized->term_id;
+                          }
+
+                          $parents = get_terms([
+                              'taxonomy'   => 'product_cat',
+                              'hide_empty' => true,
+                              'parent'     => 0,
+                              'exclude'    => $exclude_ids
+                          ]);
+
+                          if (!empty($parents) && !is_wp_error($parents)) :
+
+                              foreach ($parents as $parent) :
+
+                          ?>
+
+                              <!-- Parent Category -->
+
+                              <div class="form-check">
+
+                                  <input class="form-check-input"
+                                        type="checkbox"
+                                        name="product_cat[]"
+                                        value="<?php echo esc_attr($parent->slug); ?>"
+                                        id="cat-<?php echo esc_attr($parent->term_id); ?>"
+                                        <?php checked(in_array($parent->slug, $selected)); ?>>
+
+                                  <label class="form-check-label fw-semibold"
+                                        for="cat-<?php echo esc_attr($parent->term_id); ?>">
+
+                                      <?php echo esc_html($parent->name); ?>
+
+                                  </label>
+
+                              </div>
+
+                              <?php
+
+                              $children = get_terms([
+                                  'taxonomy'   => 'product_cat',
+                                  'hide_empty' => true,
+                                  'parent'     => $parent->term_id
+                              ]);
+
+                              if (!empty($children) && !is_wp_error($children)) :
+
+                                  foreach ($children as $child) :
+
+                              ?>
+
+                                  <!-- Child Category -->
+
+                                  <div class="form-check ms-4">
+
+                                      <input class="form-check-input"
+                                            type="checkbox"
+                                            name="product_cat[]"
+                                            value="<?php echo esc_attr($child->slug); ?>"
+                                            id="cat-<?php echo esc_attr($child->term_id); ?>"
+                                            <?php checked(in_array($child->slug, $selected)); ?>>
+
+                                      <label class="form-check-label"
+                                            for="cat-<?php echo esc_attr($child->term_id); ?>">
+
+                                          └ <?php echo esc_html($child->name); ?>
+
+                                      </label>
+
+                                  </div>
+
+                              <?php
+
+                                  endforeach;
+
+                              endif;
+
+                              ?>
+
+                          <?php
+
+                              endforeach;
+
+                          endif;
+
+                          ?>
+
+                      </div>
+
+                  </div>
+
+                  <div class="d-grid gap-2">
+
+                      <button type="submit"
+                              class="btn btn-primary rounded-1">
+
+                          Search Tours
+
+                      </button>
+
+                      <a href="<?php echo esc_url(
+                          wc_get_page_permalink('shop')
+                      ); ?>"
+                        class="btn btn-outline-secondary rounded-1">
+
+                          Clear Filters
+
+                      </a>
+
+                  </div>
+
+              </form>
 
           </div>
-
-          <!-- Category -->
-          <div class="mb-4">
-
-            <label class="form-label fw-semibold small">
-              Tour Categories
-            </label>
-
-            <div class="d-flex flex-column gap-3 small">
-
-              <?php
-              $terms = get_terms([
-                'taxonomy' => 'product_cat',
-                'hide_empty' => true,
-              ]);
-
-              $selected = isset($_GET['product_cat']) ? (array) $_GET['product_cat'] : [];
-
-              if (!empty($terms) && !is_wp_error($terms)) :
-                foreach ($terms as $term) :
-              ?>
-
-              <div class="form-check">
-
-                <input class="form-check-input"
-                      type="checkbox"
-                      name="product_cat[]"
-                      value="<?php echo esc_attr($term->slug); ?>"
-                      id="cat-<?php echo esc_attr($term->term_id); ?>"
-                      <?php checked(in_array($term->slug, $selected)); ?>>
-
-                <label class="form-check-label"
-                      for="cat-<?php echo esc_attr($term->term_id); ?>">
-                  <?php echo esc_html($term->name); ?>
-                </label>
-
-              </div>
-
-              <?php
-                endforeach;
-              endif;
-              ?>
-
-            </div>
-
-          </div>
-
-          <button type="submit" class="btn btn-dark w-100 rounded-1">
-            Clear Filters
-          </button>
-
-            </form>
-
-        </div>
 
       </div>
 
