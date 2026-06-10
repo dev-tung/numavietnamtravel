@@ -602,7 +602,8 @@ RESPONSIVE
                         <img src="<?php echo esc_url($image); ?>"
                             class="img-fluid rounded-4 mb-3"
                             alt="<?php echo esc_attr($category->name); ?>"
-                            style="height:120px;width:100%;object-fit:cover;">
+                            style="height:120px;width:100%;object-fit:cover;"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Destination';">
 
                         <h6 class="mb-1">
 
@@ -682,19 +683,18 @@ RESPONSIVE
                             <?php the_post_thumbnail(
                                 'large',
                                 [
-                                    'class' => 'card-img-top blog-image',
-                                    'style' => 'height:240px;object-fit:cover;'
+                                    'class' => 'card-img-top rounded-top',
+                                    'style' => 'height:220px;object-fit:cover;',
+                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Tour+Image';"
                                 ]
                             ); ?>
 
                         <?php else : ?>
 
-                            <img src="<?php echo esc_url(
-                                get_template_directory_uri() .
-                                '/assets/images/blog-placeholder.jpg'
-                            ); ?>"
-                            class="card-img-top blog-image"
-                            alt="<?php the_title_attribute(); ?>">
+                            <img src="https://placehold.co/800x500?text=Tour+Image"
+                                class="card-img-top rounded-top"
+                                style="height:220px;object-fit:cover;"
+                                alt="<?php the_title_attribute(); ?>">
 
                         <?php endif; ?>
 
