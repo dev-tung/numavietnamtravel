@@ -566,13 +566,34 @@ RESPONSIVE
 
             <?php
 
-            $categories = get_terms([
+            $allCategories = get_terms([
                 'taxonomy'   => 'product_cat',
                 'hide_empty' => true,
-                'number'     => 6,
-                'orderby'    => 'count',
-                'order'      => 'DESC',
             ]);
+
+            $categories = [];
+
+            foreach ($allCategories as $category) {
+
+                // Cấp 1
+                if ($category->parent == 0) {
+                    $categories[] = $category;
+                    continue;
+                }
+
+                // Cấp 2
+                $parent = get_term(
+                    $category->parent,
+                    'product_cat'
+                );
+
+                if ($parent && $parent->parent == 0) {
+                    $categories[] = $category;
+                }
+            }
+
+            // Giới hạn 6 mục
+            $categories = array_slice($categories, 0, 6);
 
             foreach ($categories as $category) :
 
