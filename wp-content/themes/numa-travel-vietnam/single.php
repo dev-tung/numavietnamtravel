@@ -77,344 +77,408 @@
 </style>
 
 <main class="container p-3 blog-single">
+   <div class="bg-white shadow-sm p-4">
 
-<div class="bg-white shadow-sm p-4">
+   <!-- Breadcrumb -->
+    <nav class="small text-muted mb-4">
 
-<nav class="small text-muted mb-4">
+        <a href="<?php echo esc_url(home_url('/')); ?>"
+        class="text-decoration-none text-muted">
+            Trang chủ
+        </a>
 
-<a href="#"
-class="text-decoration-none text-muted">
+        <span class="mx-2">›</span>
 
-Trang chủ
+        <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>"
+        class="text-decoration-none text-muted">
+            Blog
+        </a>
 
-</a>
+        <?php
+        $categories = get_the_category();
 
-<span class="mx-2">›</span>
+        if (!empty($categories)) :
+        ?>
 
-<a href="#"
-class="text-decoration-none text-muted">
+            <span class="mx-2">›</span>
 
-Blog
+            <a href="<?php echo esc_url(
+                get_category_link($categories[0]->term_id)
+            ); ?>"
+            class="text-decoration-none text-muted">
 
-</a>
+                <?php echo esc_html($categories[0]->name); ?>
 
-<span class="mx-2">›</span>
+            </a>
 
-<span>
+        <?php endif; ?>
 
-Top 10 địa điểm đẹp ở Đà Nẵng không thể bỏ lỡ
+        <span class="mx-2">›</span>
 
-</span>
+        <span>
+            <?php the_title(); ?>
+        </span>
 
-</nav>
+    </nav>
+      
+      <div class="row g-4">
+        
+        <!-- CONTENT -->
+        <div class="col-lg-8">
 
+            <!-- Category -->
+            <div class="text-uppercase small fw-semibold mb-2">
 
-<div class="row g-4">
+                <?php
+                $categories = get_the_category();
 
+                if (!empty($categories)) {
+                    echo esc_html($categories[0]->name);
+                }
+                ?>
 
-<!-- CONTENT -->
+            </div>
 
-<div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="fw-bold mb-4">
+                <?php the_title(); ?>
+            </h1>
 
-<div class="text-uppercase small fw-semibold mb-2">
+            <!-- Meta -->
+            <div class="article-meta">
 
-Du lịch
+                <div class="meta-item">
 
-</div>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        viewBox="0 0 24 24">
 
-<h1 class="fw-bold mb-4">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12"
+                                cy="7"
+                                r="4"/>
 
-Top 10 địa điểm đẹp ở Đà Nẵng không thể bỏ lỡ
+                    </svg>
 
-</h1>
+                    <?php the_author(); ?>
 
+                </div>
 
-<div class="article-meta">
+                <div class="meta-item">
 
-<div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        viewBox="0 0 24 24">
 
-<svg xmlns="http://www.w3.org/2000/svg"
-fill="none"
-stroke="currentColor"
-stroke-width="1.8"
-viewBox="0 0 24 24">
+                        <circle cx="12"
+                                cy="12"
+                                r="9"/>
 
-<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <path d="M12 7v5l3 2"/>
 
-<circle cx="12"
-cy="7"
-r="4"/>
+                    </svg>
 
-</svg>
+                    <?php echo get_the_date(); ?>
 
-Admin
+                </div>
 
-</div>
+            </div>
 
+            <!-- Featured Image -->
+            <?php
+            $image = get_the_post_thumbnail_url(
+                get_the_ID(),
+                'full'
+            );
 
-<div class="meta-item">
+            if (!$image) {
+                $image = 'https://placehold.co/1200x700?text=Blog+Image';
+            }
+            ?>
 
-<svg xmlns="http://www.w3.org/2000/svg"
-fill="none"
-stroke="currentColor"
-stroke-width="1.8"
-viewBox="0 0 24 24">
+            <img src="<?php echo esc_url($image); ?>"
+                class="article-cover"
+                alt="<?php the_title_attribute(); ?>"
+                loading="lazy"
+                decoding="async"
+                onerror="this.onerror=null;this.src='https://placehold.co/1200x700?text=Blog+Image';">
 
-<circle cx="12"
-cy="12"
-r="9"/>
+            <!-- Content -->
+            <div class="article-content">
 
-<path d="M12 7v5l3 2"/>
+                <?php the_content(); ?>
 
-</svg>
+            </div>
 
-3 ngày trước
+            <!-- Related Posts -->
+            <?php
 
-</div>
+            $relatedPosts = new WP_Query([
+                'post_type'      => 'post',
+                'posts_per_page' => 3,
+                'post__not_in'   => [get_the_ID()],
+                'category__in'   => wp_get_post_categories(get_the_ID())
+            ]);
 
-</div>
+            if ($relatedPosts->have_posts()) :
+            ?>
 
+                <div class="related-box">
 
+                    <h4 class="fw-bold mb-4">
+                        Bài viết liên quan
+                    </h4>
 
-<img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80"
-class="article-cover">
+                    <div class="row g-4">
 
+                        <?php while ($relatedPosts->have_posts()) : ?>
 
+                            <?php $relatedPosts->the_post(); ?>
 
-<p>
+                            <div class="col-md-4">
 
-Đà Nẵng – thành phố biển xinh đẹp của miền Trung Việt Nam –
-luôn là điểm đến lý tưởng cho mọi du khách.
+                                <a href="<?php the_permalink(); ?>"
+                                class="text-decoration-none text-dark">
 
-</p>
+                                    <?php
+                                    $relatedImage = get_the_post_thumbnail_url(
+                                        get_the_ID(),
+                                        'medium'
+                                    );
 
-<p>
+                                    if (!$relatedImage) {
+                                        $relatedImage = 'https://placehold.co/800x500?text=Blog+Image';
+                                    }
+                                    ?>
 
-Không chỉ nổi tiếng với biển xanh,
-cát trắng, Đà Nẵng còn sở hữu nhiều điểm du lịch hấp dẫn.
+                                    <img src="<?php echo esc_url($relatedImage); ?>"
+                                        class="img-fluid mb-3 rounded"
+                                        alt="<?php the_title_attribute(); ?>"
+                                        loading="lazy"
+                                        decoding="async"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/800x500?text=Blog+Image';">
 
-</p>
+                                    <div>
 
-<p>
+                                        <?php the_title(); ?>
 
-Dưới đây là top 10 địa điểm đẹp ở Đà Nẵng
-mà bạn không nên bỏ lỡ.
+                                    </div>
 
-</p>
+                                </a>
 
+                            </div>
 
-<h3 class="fw-bold mt-5 mb-4">
+                        <?php endwhile; ?>
 
-1. Bà Nà Hills
+                    </div>
 
-</h3>
+                </div>
 
-<p>
+                <?php wp_reset_postdata(); ?>
 
-Bà Nà Hills được mệnh danh là
-“chốn bồng lai tiên cảnh”
-với khí hậu mát mẻ quanh năm.
+            <?php endif; ?>
 
-</p>
+        </div>
 
-<p>
+        <!-- SIDEBAR -->
+        <div class="col-lg-4">
 
-Nơi đây nổi tiếng với Cầu Vàng,
-Làng Pháp,
-Fantasy Park...
+            <!-- Search -->
+            <div class="sidebar-box">
 
-</p>
+                <div class="sidebar-title">
+                    Tìm kiếm
+                </div>
 
+                <form role="search"
+                    method="get"
+                    action="<?php echo esc_url(home_url('/')); ?>">
 
-<img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80"
-class="article-image mb-5">
+                    <div class="input-group">
 
+                        <input type="search"
+                            name="s"
+                            class="form-control border-end-0"
+                            placeholder="Nhập từ khóa..."
+                            value="<?php echo get_search_query(); ?>">
 
+                        <button type="submit"
+                                class="input-group-text bg-white border-start-0">
 
-<div class="related-box">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24">
 
-<h4 class="fw-bold mb-4">
+                                <circle cx="11"
+                                        cy="11"
+                                        r="8"/>
 
-Bài viết liên quan
+                                <path d="m21 21-4.3-4.3"/>
 
-</h4>
+                            </svg>
 
+                        </button>
 
-<div class="row g-4">
+                    </div>
 
-<?php for($i=1;$i<=3;$i++): ?>
+                </form>
 
-<div class="col-md-4">
+            </div>
 
-<img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=800&q=80"
-class="img-fluid mb-3">
+            <!-- Categories -->
+            <div class="sidebar-box">
 
-<div>
+                <div class="sidebar-title">
+                    Danh mục
+                </div>
 
-Kinh nghiệm du lịch Hội An chi tiết từ A-Z
+                <?php
+                $categories = get_categories([
+                    'hide_empty' => true,
+                ]);
 
-</div>
+                foreach ($categories as $category) :
+                ?>
 
-</div>
+                    <a href="<?php echo esc_url(
+                        get_category_link($category->term_id)
+                    ); ?>"
+                    class="category-item d-flex justify-content-between text-decoration-none text-dark">
 
-<?php endfor; ?>
+                        <span>
+                            <?php echo esc_html($category->name); ?>
+                        </span>
 
-</div>
+                        <span>
+                            <?php echo $category->count; ?>
+                        </span>
 
-</div>
+                    </a>
 
-</div>
+                <?php endforeach; ?>
 
+            </div>
 
+            <!-- Featured Posts -->
+            <div class="sidebar-box">
 
-<!-- SIDEBAR -->
+                <div class="sidebar-title">
+                    Bài viết mới nhất
+                </div>
 
-<div class="col-lg-4">
+                <?php
 
+                $latestPosts = new WP_Query([
+                    'post_type'      => 'post',
+                    'posts_per_page' => 4,
+                    'post_status'    => 'publish'
+                ]);
 
-<div class="sidebar-box">
+                while ($latestPosts->have_posts()) :
 
-<div class="sidebar-title">
+                    $latestPosts->the_post();
 
-Tìm kiếm
+                    $image = get_the_post_thumbnail_url(
+                        get_the_ID(),
+                        'thumbnail'
+                    );
 
-</div>
+                    if (!$image) {
+                        $image = 'https://placehold.co/400x300?text=Blog';
+                    }
 
-<div class="input-group">
+                ?>
 
-<input type="text"
-class="form-control border-end-0"
-placeholder="Nhập từ khóa...">
+                    <a href="<?php the_permalink(); ?>"
+                    class="post-mini text-decoration-none text-dark">
 
-<span class="input-group-text bg-white border-start-0">
+                        <img src="<?php echo esc_url($image); ?>"
+                            alt="<?php the_title_attribute(); ?>"
+                            loading="lazy"
+                            decoding="async"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Blog';">
 
-<svg xmlns="http://www.w3.org/2000/svg"
-width="18"
-height="18"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
-viewBox="0 0 24 24">
+                        <div>
 
-<circle cx="11"
-cy="11"
-r="8"/>
+                            <?php the_title(); ?>
 
-<path d="m21 21-4.3-4.3"/>
+                        </div>
 
-</svg>
+                    </a>
 
-</span>
+                <?php endwhile; ?>
 
-</div>
+                <?php wp_reset_postdata(); ?>
 
-</div>
+            </div>
 
+            <!-- Related Posts -->
+            <div class="sidebar-box">
 
+                <div class="sidebar-title">
+                    Bài viết liên quan
+                </div>
 
-<div class="sidebar-box">
+                <?php
 
-<div class="sidebar-title">
+                $relatedPosts = new WP_Query([
+                    'post_type'      => 'post',
+                    'posts_per_page' => 3,
+                    'post__not_in'   => [get_the_ID()],
+                    'category__in'   => wp_get_post_categories(get_the_ID()),
+                    'post_status'    => 'publish'
+                ]);
 
-Danh mục
+                while ($relatedPosts->have_posts()) :
 
-</div>
+                    $relatedPosts->the_post();
 
-<?php
-$cats=[
-"Du lịch",
-"Kinh nghiệm",
-"Ẩm thực",
-"Điểm đến",
-"Tin tức"
-];
+                    $image = get_the_post_thumbnail_url(
+                        get_the_ID(),
+                        'thumbnail'
+                    );
 
-foreach($cats as $cat):
-?>
+                    if (!$image) {
+                        $image = 'https://placehold.co/400x300?text=Blog';
+                    }
 
-<div class="category-item">
+                ?>
 
-<span>
+                    <a href="<?php the_permalink(); ?>"
+                    class="post-mini text-decoration-none text-dark">
 
-<?= $cat ?>
+                        <img src="<?php echo esc_url($image); ?>"
+                            alt="<?php the_title_attribute(); ?>"
+                            loading="lazy"
+                            decoding="async"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Blog';">
 
-</span>
+                        <div>
 
-<span>
+                            <?php the_title(); ?>
 
-›
+                        </div>
 
-</span>
+                    </a>
 
-</div>
+                <?php endwhile; ?>
 
-<?php endforeach; ?>
+                <?php wp_reset_postdata(); ?>
 
-</div>
+            </div>
 
+        </div>
 
-
-<div class="sidebar-box">
-
-<div class="sidebar-title">
-
-Bài viết nổi bật
-
-</div>
-
-<?php for($i=1;$i<=4;$i++): ?>
-
-<div class="post-mini">
-
-<img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=400&q=80">
-
-<div>
-
-Kinh nghiệm du lịch Đà Lạt tự túc chi tiết nhất
-
-</div>
-
-</div>
-
-<?php endfor; ?>
-
-</div>
-
-
-
-<div class="sidebar-box">
-
-<div class="sidebar-title">
-
-Bài viết liên quan
-
-</div>
-
-<?php for($i=1;$i<=3;$i++): ?>
-
-<div class="post-mini">
-
-<img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=400&q=80">
-
-<div>
-
-Kinh nghiệm săn vé máy bay giá rẻ
-
-</div>
-
-</div>
-
-<?php endfor; ?>
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
+      </div>
+   </div>
 </main>
 
 <?php get_footer(); ?>

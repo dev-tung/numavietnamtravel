@@ -354,24 +354,23 @@
 
                                     <a href="<?php the_permalink(); ?>">
 
-                                        <?php if (has_post_thumbnail()) : ?>
+                                        <?php
+                                        $image = get_the_post_thumbnail_url(
+                                            get_the_ID(),
+                                            'large'
+                                        );
 
-                                            <?php the_post_thumbnail(
-                                                'large',
-                                                [
-                                                    'class' => 'img-fluid w-100 h-100 object-fit-cover'
-                                                ]
-                                            ); ?>
+                                        if (!$image) {
+                                            $image = 'https://placehold.co/800x500?text=Post+Image';
+                                        }
+                                        ?>
 
-                                        <?php else : ?>
-
-                                            <img
-                                                src="https://via.placeholder.com/800x500"
-                                                class="img-fluid w-100 h-100 object-fit-cover"
-                                                alt="<?php the_title_attribute(); ?>"
-                                            >
-
-                                        <?php endif; ?>
+                                        <img src="<?php echo esc_url($image); ?>"
+                                            class="img-fluid w-100 h-100 object-fit-cover"
+                                            alt="<?php echo esc_attr(get_the_title()); ?>"
+                                            loading="lazy"
+                                            decoding="async"
+                                            onerror="this.onerror=null;this.src='https://placehold.co/800x500?text=Post+Image';">
 
                                     </a>
 

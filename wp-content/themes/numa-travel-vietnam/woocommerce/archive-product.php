@@ -294,14 +294,23 @@
 
                 <a href="<?php the_permalink(); ?>">
 
-                  <?php echo get_the_post_thumbnail(
+                <?php
+                $image = get_the_post_thumbnail_url(
                     get_the_ID(),
-                    'large',
-                    [
-                      'class' => 'img-fluid w-100 h-100 object-fit-cover',
-                      'alt'   => get_the_title()
-                    ]
-                  ); ?>
+                    'large'
+                );
+
+                if (!$image) {
+                    $image = 'https://placehold.co/800x600?text=Tour+Image';
+                }
+                ?>
+
+                <img src="<?php echo esc_url($image); ?>"
+                    class="img-fluid w-100 h-100 object-fit-cover"
+                    alt="<?php echo esc_attr(get_the_title()); ?>"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.onerror=null;this.src='https://placehold.co/800x600?text=Tour+Image';">
 
                 </a>
 

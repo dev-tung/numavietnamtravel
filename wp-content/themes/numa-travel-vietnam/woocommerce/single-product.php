@@ -905,29 +905,28 @@ MODAL GALLERY
 
                 <article class="card border rounded-1 h-100 overflow-hidden FeaturedTour__card">
 
-                    <a href="<?php the_permalink(); ?>">
+                  <a href="<?php the_permalink(); ?>">
 
-                        <?php if (has_post_thumbnail()) : ?>
+                      <?php
+                      $image = get_the_post_thumbnail_url(
+                          get_the_ID(),
+                          'large'
+                      );
 
-                            <?php the_post_thumbnail(
-                                'large',
-                                [
-                                    'class' => 'card-img-top object-fit-cover',
-                                    'style' => 'height:220px;',
-                                    'alt'   => get_the_title()
-                                ]
-                            ); ?>
+                      if (!$image) {
+                          $image = 'https://placehold.co/800x500?text=Post+Image';
+                      }
+                      ?>
 
-                        <?php else : ?>
+                      <img src="<?php echo esc_url($image); ?>"
+                          class="card-img-top object-fit-cover"
+                          style="height:220px;"
+                          alt="<?php echo esc_attr(get_the_title()); ?>"
+                          loading="lazy"
+                          decoding="async"
+                          onerror="this.onerror=null;this.src='https://placehold.co/800x500?text=Post+Image';">
 
-                            <img src="https://via.placeholder.com/800x500"
-                                class="card-img-top object-fit-cover"
-                                style="height:220px;"
-                                alt="<?php the_title_attribute(); ?>">
-
-                        <?php endif; ?>
-
-                    </a>
+                  </a>
 
                     <div class="card-body d-flex flex-column">
 
