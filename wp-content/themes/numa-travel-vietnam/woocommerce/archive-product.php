@@ -278,7 +278,7 @@
                                       <label class="form-check-label"
                                             for="cat-<?php echo esc_attr($child->term_id); ?>">
 
-                                          └ <?php echo esc_html($child->name); ?>
+                                           <?php echo esc_html($child->name); ?>
 
                                       </label>
 
