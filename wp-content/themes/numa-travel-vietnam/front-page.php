@@ -685,13 +685,13 @@ RESPONSIVE
                                 [
                                     'class' => 'card-img-top rounded-top',
                                     'style' => 'height:220px;object-fit:cover;',
-                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Tour+Image';"
+                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Post+Image';"
                                 ]
                             ); ?>
 
                         <?php else : ?>
 
-                            <img src="https://placehold.co/800x500?text=Tour+Image"
+                            <img src="https://placehold.co/800x500?text=Post+Image"
                                 class="card-img-top rounded-top"
                                 style="height:220px;object-fit:cover;"
                                 alt="<?php the_title_attribute(); ?>">
