@@ -78,22 +78,18 @@
 
     <nav class="mb-3 small text-muted">
 
-        <a href="#"
-           class="text-decoration-none text-muted">
+        <a href="<?php echo esc_url(home_url('/')); ?>"
+        class="text-decoration-none text-muted">
 
             Trang chủ
 
         </a>
 
-        <span class="mx-2">
-
-            ›
-
-        </span>
+        <span class="mx-2">›</span>
 
         <span>
 
-            Giới thiệu
+            <?php the_title(); ?>
 
         </span>
 

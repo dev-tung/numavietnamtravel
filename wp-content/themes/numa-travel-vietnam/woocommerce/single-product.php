@@ -330,66 +330,76 @@ MODAL GALLERY
     </nav>
 
     <!-- Heading -->
+    <?php
+    $tourDuration  = get_field('tour_duration');
+    $tourDeparture = get_field('tour_departure');
+    $tourReview    = get_field('tour_review');
+    ?>
+
     <div class="d-flex flex-column flex-xl-row justify-content-between gap-3 mb-4">
 
       <div>
 
         <h1 class="fw-bold mb-3">
-            <?php the_title(); ?>
+          <?php the_title(); ?>
         </h1>
 
         <div class="d-flex flex-wrap gap-4 text-muted small">
 
+          <!-- Duration -->
           <span class="d-flex align-items-center gap-2">
 
             <svg xmlns="http://www.w3.org/2000/svg"
-                 width="16"
-                 height="16"
-                 fill="currentColor"
-                 class="bi bi-clock"
-                 viewBox="0 0 16 16">
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-clock"
+                viewBox="0 0 16 16">
 
               <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
               <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
 
             </svg>
 
-            3 Days 2 Nights
+            <?php echo esc_html($tourDuration ?: '3 Days 2 Nights'); ?>
 
           </span>
 
+          <!-- Departure -->
           <span class="d-flex align-items-center gap-2">
 
             <svg xmlns="http://www.w3.org/2000/svg"
-                 width="16"
-                 height="16"
-                 fill="currentColor"
-                 class="bi bi-calendar-event"
-                 viewBox="0 0 16 16">
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-calendar-event"
+                viewBox="0 0 16 16">
 
               <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
               <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
 
             </svg>
 
-            Departure: Daily
+            Departure:
+            <?php echo esc_html($tourDeparture ?: 'Daily'); ?>
 
           </span>
 
+          <!-- Review -->
           <span class="d-flex align-items-center gap-2">
 
             <svg xmlns="http://www.w3.org/2000/svg"
-                 width="16"
-                 height="16"
-                 fill="currentColor"
-                 class="bi bi-star"
-                 viewBox="0 0 16 16">
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star"
+                viewBox="0 0 16 16">
 
               <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.33-.314.158-.888-.283-.95l-4.898-.696-2.174-4.468a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.282.95l3.523 3.356-.83 4.73z"/>
 
             </svg>
 
-            4.8 (120 reviews)
+            <?php echo esc_html($tourReview ?: 'Excellent Tour Experience'); ?>
 
           </span>
 
@@ -611,56 +621,76 @@ MODAL GALLERY
               </div>
 
               <!-- Highlight -->
+              <?php
+              $highlights = [
+                  'Professional Tour Guide',
+                  'Comfortable Transportation',
+                  'Selected Accommodation',
+                  'Local Cuisine Experience'
+              ];
+              ?>
+
               <div class="row row-cols-2 row-cols-lg-4 g-3 mb-5">
 
-                <div class="col">
-                  <div class="border rounded-1 p-3 h-100 small">
-                    Visit Ha Long Bay
-                  </div>
-                </div>
+                  <?php foreach ($highlights as $highlight) : ?>
 
-                <div class="col">
-                  <div class="border rounded-1 p-3 h-100 small">
-                    Trang An Boat Tour
-                  </div>
-                </div>
+                      <div class="col">
+                          <div class="border rounded-1 p-3 h-100 small">
+                              <?php echo esc_html($highlight); ?>
+                          </div>
+                      </div>
 
-                <div class="col">
-                  <div class="border rounded-1 p-3 h-100 small">
-                    Explore Hoa Lu
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="border rounded-1 p-3 h-100 small">
-                    Local Cuisine
-                  </div>
-                </div>
+                  <?php endforeach; ?>
 
               </div>
 
               <!-- Info -->
+              <?php
+              $tourDuration       = get_field('tour_duration');
+              $tourDeparture      = get_field('tour_departure');
+              $tourTransportation = get_field('tour_transportation');
+              $tourAccommodation  = get_field('tour_accommodation');
+              $tourMeal           = get_field('tour_meal');
+              ?>
+
               <div class="row gy-3 small">
 
-                <div class="col-12 col-md-6">
-                  <strong>Duration</strong><br>
-                  3 Days 2 Nights
-                </div>
+                  <div class="col-12 col-md-6">
+                      <strong>Duration</strong><br>
+                      <?php echo esc_html($tourDuration ?: '3 Days 2 Nights'); ?>
+                  </div>
 
-                <div class="col-12 col-md-6">
-                  <strong>Departure</strong><br>
-                  Daily
-                </div>
+                  <div class="col-12 col-md-6">
+                      <strong>Departure</strong><br>
+                      <?php echo esc_html($tourDeparture ?: 'Daily'); ?>
+                  </div>
 
-                <div class="col-12 col-md-6">
-                  <strong>Transportation</strong><br>
-                  Modern Tourist Bus
-                </div>
+                  <div class="col-12 col-md-6">
+                      <strong>Transportation</strong><br>
+                      <?php echo esc_html(
+                          wp_strip_all_tags(
+                              $tourTransportation ?: 'Modern Tourist Bus'
+                          )
+                      ); ?>
+                  </div>
 
-                <div class="col-12 col-md-6">
-                  <strong>Accommodation</strong><br>
-                  3-4 Star Hotel
-                </div>
+                  <div class="col-12 col-md-6">
+                      <strong>Accommodation</strong><br>
+                      <?php echo esc_html(
+                          wp_strip_all_tags(
+                              $tourAccommodation ?: '3-4 Star Hotel'
+                          )
+                      ); ?>
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                      <strong>Meals</strong><br>
+                      <?php echo esc_html(
+                          wp_strip_all_tags(
+                              $tourMeal ?: 'Meals Included'
+                          )
+                      ); ?>
+                  </div>
 
               </div>
 
@@ -679,20 +709,21 @@ MODAL GALLERY
             </div>
 
             <!-- MAP -->
-            <div class="TourTabPane"
-                id="tab-map">
+            <div class="TourTabPane" id="tab-map">
 
-              <div class="ratio ratio-16x9 overflow-hidden rounded-1">
+                <div class="ratio ratio-16x9 overflow-hidden rounded-1">
 
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.036341277607!2d105.8341597751075!3d21.028511180622996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9901d5d8b5%3A0x6f7d0f4d9a8f4e2!2sHanoi!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s"
-                  style="border:0;"
-                  allowfullscreen=""
-                  loading="lazy">
+                    <?php
+                    $tourMap = get_field('tour_map');
 
-                </iframe>
+                    if (!empty($tourMap)) {
+                        echo $tourMap;
+                    } else {
+                        echo '<p class="text-muted p-3">Map information is not available.</p>';
+                    }
+                    ?>
 
-              </div>
+                </div>
 
             </div>
 
@@ -700,51 +731,25 @@ MODAL GALLERY
             <div class="TourTabPane"
                 id="tab-review">
 
-              <div class="d-flex flex-column gap-4">
+                <?php
+                $tourReview = get_field('tour_review');
+                ?>
 
-                <div class="border rounded-1 p-4">
+                <?php if (!empty($tourReview)) : ?>
 
-                  <div class="d-flex justify-content-between mb-2">
+                    <div class="border rounded-1 p-4">
 
-                    <div class="fw-bold">
-                      John Smith
+                        <?php echo wp_kses_post($tourReview); ?>
+
                     </div>
 
-                    <div class="text-warning">
-                      ★★★★★
+                <?php else : ?>
+
+                    <div class="alert alert-light mb-0">
+                        No reviews available for this tour.
                     </div>
 
-                  </div>
-
-                  <p class="text-muted mb-0">
-                    Amazing experience! The itinerary was very well organized
-                    and the tour guide was extremely friendly.
-                  </p>
-
-                </div>
-
-                <div class="border rounded-1 p-4">
-
-                  <div class="d-flex justify-content-between mb-2">
-
-                    <div class="fw-bold">
-                      Emily Johnson
-                    </div>
-
-                    <div class="text-warning">
-                      ★★★★★
-                    </div>
-
-                  </div>
-
-                  <p class="text-muted mb-0">
-                    Beautiful destinations, delicious food and comfortable hotels.
-                    Highly recommended.
-                  </p>
-
-                </div>
-
-              </div>
+                <?php endif; ?>
 
             </div>
 
@@ -755,52 +760,102 @@ MODAL GALLERY
       </div>
 
       <!-- RIGHT -->
+      <?php
+      $tourPrice          = get_field('tour_price');
+      $tourPriceNote      = get_field('tour_price_note');
+      $tourDeparture      = get_field('tour_departure');
+      $tourTransportation = get_field('tour_transportation');
+      $tourAccommodation  = get_field('tour_accommodation');
+      $tourMeal           = get_field('tour_meal');
+      ?>
+
       <div class="col-12 col-xl-4">
 
-        <div class="border rounded-1 p-4 mb-4 sticky-top bg-white"
-             style="top: 100px;">
+          <div class="border rounded-1 p-4 mb-4 sticky-top bg-white"
+              style="top: 100px;">
 
-          <h4 class="fw-bold mb-4">
-            Tour Price
-          </h4>
+              <h4 class="fw-bold mb-4">
+                  Tour Price
+              </h4>
 
-          <div class="mb-4">
+              <div class="mb-4">
 
-            <div class="fw-bold fs-2">
-              2,990,000 VND
-            </div>
+                  <div class="fw-bold fs-2">
+                      <?php echo esc_html($tourPrice ?: 'Contact Us'); ?>
+                  </div>
 
-            <p class="small text-muted mb-0">
-              Applicable for groups from 2 guests
-            </p>
+                  <p class="small text-muted mb-0">
+                      <?php
+                      echo esc_html(
+                          $tourPriceNote
+                          ?: 'Price may vary depending on departure date and group size.'
+                      );
+                      ?>
+                  </p>
+
+              </div>
+
+              <div class="border-top border-bottom py-4 mb-4 d-flex flex-column gap-3 small">
+
+                  <div>
+                      ✓ Departure:
+                      <?php echo esc_html($tourDeparture ?: 'Daily'); ?>
+                  </div>
+
+                  <div>
+                      ✓ Transportation:
+                      <?php
+                      echo esc_html(
+                          wp_strip_all_tags(
+                              $tourTransportation ?: 'Tourist Bus'
+                          )
+                      );
+                      ?>
+                  </div>
+
+                  <div>
+                      ✓ Hotel:
+                      <?php
+                      echo esc_html(
+                          wp_strip_all_tags(
+                              $tourAccommodation ?: '3-4 Star Hotel'
+                          )
+                      );
+                      ?>
+                  </div>
+
+                  <div>
+                      ✓ Meals:
+                      <?php
+                      echo esc_html(
+                          wp_strip_all_tags(
+                              $tourMeal ?: 'Meals Included'
+                          )
+                      );
+                      ?>
+                  </div>
+
+              </div>
+
+              <div class="d-grid gap-3">
+
+                  <a href="<?php echo esc_url('?add-to-cart=' . get_the_ID()); ?>"
+                    class="btn btn-dark rounded-1 py-3 w-100">
+
+                      Book Now
+
+                  </a>
+
+                  <a href="/contact"
+                    class="btn btn-outline-dark rounded-1 py-3">
+
+                      Contact Consultant
+
+                  </a>
+
+              </div>
 
           </div>
-
-          <div class="border-top border-bottom py-4 mb-4 d-flex flex-column gap-3 small">
-
-            <div>✓ Departure: Daily</div>
-            <div>✓ Transportation: Tourist Bus</div>
-            <div>✓ Hotel: 3-4 Star</div>
-            <div>✓ Meals Included</div>
-
-          </div>
-
-          <div class="d-grid gap-3">
-
-            <a href="<?php echo esc_url(home_url('/?add-to-cart=15')); ?>"
-              class="btn btn-dark rounded-1 py-3 w-100">
-
-              Book Now
-
-            </a>
-
-            <a href="#" class="btn btn-outline-dark rounded-1 py-3">
-              Contact Consultant
-            </a>
-
-          </div>
-
-        </div>
 
       </div>
 
@@ -809,103 +864,173 @@ MODAL GALLERY
     <!-- Featured -->
     <section class="mt-5 border rounded-1 p-4 bg-white">
 
-      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h3 class="fw-bold mb-0">
-          Featured Tours
-        </h3>
+            <h3 class="fw-bold mb-0">
+                Featured Tours
+            </h3>
 
-        <a href="#" class="text-decoration-none small text-dark">
-          View All →
-        </a>
-
-      </div>
-
-      <div class="row g-4">
-
-        <?php for($i = 1; $i <= 3; $i++) : ?>
-
-        <div class="col-12 col-md-6 col-lg-4">
-
-          <article class="card border rounded-1 h-100 overflow-hidden FeaturedTour__card">
-
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80"
-                 class="card-img-top object-fit-cover"
-                 style="height: 220px;"
-                 alt="Tour">
-
-            <div class="card-body d-flex flex-column">
-
-              <h4 class="h6 fw-bold mb-2">
-                Tour <?= $i ?>
-              </h4>
-
-              <p class="small text-muted mb-3">
-                Ha Noi – Ha Long – Ninh Binh 3D2N
-              </p>
-
-              <!-- Meta -->
-              <div class="d-flex flex-wrap gap-3 small text-muted mb-4">
-
-                <span class="d-flex align-items-center gap-2">
-
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="14"
-                       height="14"
-                       fill="currentColor"
-                       class="bi bi-clock"
-                       viewBox="0 0 16 16">
-
-                    <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
-
-                  </svg>
-
-                  3 Days 2 Nights
-
-                </span>
-
-                <span class="d-flex align-items-center gap-2">
-
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="14"
-                       height="14"
-                       fill="currentColor"
-                       class="bi bi-calendar-event"
-                       viewBox="0 0 16 16">
-
-                    <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
-
-                  </svg>
-
-                  Daily Departure
-
-                </span>
-
-              </div>
-
-              <div class="mt-auto d-flex justify-content-between align-items-center">
-
-                <div class="fw-bold">
-                  2,990,000 VND
-                </div>
-
-                <a href="#" class="btn btn-outline-dark btn-sm rounded-1">
-                  View Details
-                </a>
-
-              </div>
-
-            </div>
-
-          </article>
+            <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>"
+              class="text-decoration-none small text-dark">
+                View All →
+            </a>
 
         </div>
 
-        <?php endfor; ?>
+        <div class="row g-4">
 
-      </div>
+            <?php
+
+            $featuredTours = new WP_Query([
+                'post_type'      => 'product',
+                'posts_per_page' => 3,
+                'post__not_in'   => [get_the_ID()],
+                'orderby'        => 'rand',
+                'post_status'    => 'publish',
+            ]);
+
+            if ($featuredTours->have_posts()) :
+
+                while ($featuredTours->have_posts()) :
+
+                    $featuredTours->the_post();
+
+                    $tourDuration  = get_field('tour_duration');
+                    $tourDeparture = get_field('tour_departure');
+                    $tourPrice     = get_field('tour_price');
+
+            ?>
+
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <article class="card border rounded-1 h-100 overflow-hidden FeaturedTour__card">
+
+                    <a href="<?php the_permalink(); ?>">
+
+                        <?php if (has_post_thumbnail()) : ?>
+
+                            <?php the_post_thumbnail(
+                                'large',
+                                [
+                                    'class' => 'card-img-top object-fit-cover',
+                                    'style' => 'height:220px;',
+                                    'alt'   => get_the_title()
+                                ]
+                            ); ?>
+
+                        <?php else : ?>
+
+                            <img src="https://via.placeholder.com/800x500"
+                                class="card-img-top object-fit-cover"
+                                style="height:220px;"
+                                alt="<?php the_title_attribute(); ?>">
+
+                        <?php endif; ?>
+
+                    </a>
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h4 class="h6 fw-bold mb-2">
+
+                            <a href="<?php the_permalink(); ?>"
+                              class="text-decoration-none text-dark">
+
+                                <?php the_title(); ?>
+
+                            </a>
+
+                        </h4>
+
+                        <p class="small text-muted mb-3">
+
+                            <?php echo wp_trim_words(
+                                get_the_excerpt(),
+                                12
+                            ); ?>
+
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3 small text-muted mb-4">
+
+                            <span class="d-flex align-items-center gap-2">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    fill="currentColor"
+                                    class="bi bi-clock"
+                                    viewBox="0 0 16 16">
+
+                                    <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
+
+                                </svg>
+
+                                <?php echo esc_html(
+                                    $tourDuration ?: '3 Days 2 Nights'
+                                ); ?>
+
+                            </span>
+
+                            <span class="d-flex align-items-center gap-2">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    fill="currentColor"
+                                    class="bi bi-calendar-event"
+                                    viewBox="0 0 16 16">
+
+                                    <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
+
+                                </svg>
+
+                                <?php echo esc_html(
+                                    $tourDeparture ?: 'Daily'
+                                ); ?>
+
+                            </span>
+
+                        </div>
+
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+
+                            <div class="fw-bold">
+
+                                <?php echo esc_html(
+                                    $tourPrice ?: 'Contact Us'
+                                ); ?>
+
+                            </div>
+
+                            <a href="<?php the_permalink(); ?>"
+                              class="btn btn-outline-dark btn-sm rounded-1">
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <?php
+
+                endwhile;
+
+                wp_reset_postdata();
+
+            endif;
+
+            ?>
+
+        </div>
 
     </section>
 

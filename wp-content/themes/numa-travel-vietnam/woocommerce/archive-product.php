@@ -270,161 +270,175 @@
           <?php if (woocommerce_product_loop()) : ?>
           <?php while (have_posts()) : the_post(); global $product; ?>
 
-            <article class="card border shadow-sm rounded-1 overflow-hidden h-100">
+          <?php
+            $tourDuration       = get_field('tour_duration');
+            $tourDeparture      = get_field('tour_departure');
+            $tourPrice          = get_field('tour_price');
+            $tourTransportation = get_field('tour_transportation');
+            $tourAccommodation  = get_field('tour_accommodation');
+            $tourMeal           = get_field('tour_meal');
+          ?>
 
-              <div class="row g-0 h-100">
+          <article class="card border shadow-sm rounded-1 overflow-hidden h-100">
 
-                <!-- Image -->
-                <div class="col-md-4 position-relative">
+            <div class="row g-0 h-100">
 
-                  <?php if ($product->is_featured()) : ?>
-                    <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
-                      Featured
-                    </span>
-                  <?php endif; ?>
+              <!-- Image -->
+              <div class="col-md-4 position-relative">
 
-                  <a href="<?php the_permalink(); ?>">
-                    <?php echo get_the_post_thumbnail(get_the_ID(), 'large', [
+                <?php if ($product->is_featured()) : ?>
+                  <span class="badge bg-primary position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
+                    Featured
+                  </span>
+                <?php endif; ?>
+
+                <a href="<?php the_permalink(); ?>">
+
+                  <?php echo get_the_post_thumbnail(
+                    get_the_ID(),
+                    'large',
+                    [
                       'class' => 'img-fluid w-100 h-100 object-fit-cover',
                       'alt'   => get_the_title()
-                    ]); ?>
-                  </a>
+                    ]
+                  ); ?>
 
-                </div>
+                </a>
 
-                <!-- Content -->
-                <div class="col-md-8">
+              </div>
 
-                  <div class="card-body p-4 h-100 d-flex flex-column">
+              <!-- Content -->
+              <div class="col-md-8">
 
-                    <div>
+                <div class="card-body p-4 h-100 d-flex flex-column">
 
-                      <h3 class="h4 fw-bold mb-3">
-                        <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
-                          <?php the_title(); ?>
-                        </a>
-                      </h3>
+                  <div>
 
-                      <!-- Meta -->
-                      <div class="d-flex flex-wrap gap-4 text-muted small mb-3">
-
-                        <span class="d-flex align-items-center gap-2">
-
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              class="bi bi-clock"
-                              viewBox="0 0 16 16">
-
-                            <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
-
-                          </svg>
-
-                          <?php
-                            echo get_post_meta(get_the_ID(), '_duration', true) ?: '3 Days 2 Nights';
-                          ?>
-
-                        </span>
-
-                        <span class="d-flex align-items-center gap-2">
-
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              class="bi bi-calendar-event"
-                              viewBox="0 0 16 16">
-
-                            <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
-
-                          </svg>
-
-                          Departure: <?php echo get_post_meta(get_the_ID(), '_departure', true) ?: 'Daily'; ?>
-
-                        </span>
-
-                      </div>
-
-                      <p class="text-muted mb-4">
-                        <?php echo wp_trim_words(get_the_excerpt(), 25); ?>
-                      </p>
-
-                      <!-- Features -->
-                      <div class="d-flex flex-wrap gap-4 text-muted small mb-4">
-
-                        <span class="d-flex align-items-center gap-2">
-
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              class="bi bi-bus-front"
-                              viewBox="0 0 16 16">
-
-                            <path d="M4 0a2 2 0 0 0-2 2v9a2 2 0 0 0 1 1.732V14a1 1 0 0 0 2 0v-1h6v1a1 1 0 1 0 2 0v-1.268A2 2 0 0 0 14 11V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v4H3V2a1 1 0 0 1 1-1z"/>
-                            <path d="M3 7h10v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7zm1.5 3a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm7 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-
-                          </svg>
-
-                          Tourist Bus
-
-                        </span>
-
-                        <span class="d-flex align-items-center gap-2">
-
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              class="bi bi-building"
-                              viewBox="0 0 16 16">
-
-                            <path d="M6.5 15V1h3v14h5V0H1v15h5zm1-13h1v1h-1V2zm0 2h1v1h-1V4zm0 2h1v1h-1V6zm0 2h1v1h-1V8z"/>
-
-                          </svg>
-
-                          3-4 Star Hotel
-
-                        </span>
-
-                        <span class="d-flex align-items-center gap-2">
-
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              class="bi bi-cup-hot"
-                              viewBox="0 0 16 16">
-
-                            <path d="M2 2h11v5a4 4 0 0 1-8 0V2z"/>
-                            <path d="M0 13h14v1H0z"/>
-
-                          </svg>
-
-                          Meals Included
-
-                        </span>
-
-                      </div>
-
-                    </div>
-
-                    <!-- Bottom -->
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
-
-                      <div class="fw-bold fs-3">
-                        2,990,000 VND
-                      </div>
-
-                      <a href="<?php the_permalink(); ?>"
-                        class="btn btn-outline-primary rounded-1 px-4">
-                        View Details
+                    <h3 class="h4 fw-bold mb-3">
+                      <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                        <?php the_title(); ?>
                       </a>
+                    </h3>
+
+                    <!-- Meta -->
+                    <div class="d-flex flex-wrap gap-4 text-muted small mb-3">
+
+                      <span class="d-flex align-items-center gap-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-clock"
+                            viewBox="0 0 16 16">
+
+                          <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3 1.8a.5.5 0 1 1-.5.86l-3.25-1.95A.5.5 0 0 1 7.5 8V4a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/>
+
+                        </svg>
+
+                        <?php echo esc_html($tourDuration ?: '3 Days 2 Nights'); ?>
+
+                      </span>
+
+                      <span class="d-flex align-items-center gap-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-calendar-event"
+                            viewBox="0 0 16 16">
+
+                          <path d="M11 6.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V9h-1a.5.5 0 0 1 0-1h1V7a.5.5 0 0 1 .5-.5z"/>
+                          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1z"/>
+
+                        </svg>
+
+                        Departure:
+                        <?php echo esc_html($tourDeparture ?: 'Daily'); ?>
+
+                      </span>
 
                     </div>
+
+                    <p class="text-muted mb-4">
+                      <?php echo wp_trim_words(get_the_excerpt(), 25); ?>
+                    </p>
+
+                    <!-- Features -->
+                    <div class="d-flex flex-wrap gap-4 text-muted small mb-4">
+
+                      <span class="d-flex align-items-center gap-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-bus-front"
+                            viewBox="0 0 16 16">
+
+                          <path d="M4 0a2 2 0 0 0-2 2v9a2 2 0 0 0 1 1.732V14a1 1 0 0 0 2 0v-1h6v1a1 1 0 1 0 2 0v-1.268A2 2 0 0 0 14 11V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v4H3V2a1 1 0 0 1 1-1z"/>
+                          <path d="M3 7h10v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7zm1.5 3a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm7 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+
+                        </svg>
+
+                        <?php echo esc_html($tourTransportation ?: 'Tourist Bus'); ?>
+
+                      </span>
+
+                      <span class="d-flex align-items-center gap-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-building"
+                            viewBox="0 0 16 16">
+
+                          <path d="M6.5 15V1h3v14h5V0H1v15h5zm1-13h1v1h-1V2zm0 2h1v1h-1V4zm0 2h1v1h-1V6zm0 2h1v1h-1V8z"/>
+
+                        </svg>
+
+                        <?php echo esc_html($tourAccommodation ?: '3-4 Star Hotel'); ?>
+
+                      </span>
+
+                      <span class="d-flex align-items-center gap-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-cup-hot"
+                            viewBox="0 0 16 16">
+
+                          <path d="M2 2h11v5a4 4 0 0 1-8 0V2z"/>
+                          <path d="M0 13h14v1H0z"/>
+
+                        </svg>
+
+                        <?php echo esc_html($tourMeal ?: 'Meals Included'); ?>
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <!-- Bottom -->
+                  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mt-auto">
+
+                    <div class="fw-bold fs-3">
+
+                      <?php echo esc_html($tourPrice ?: 'Contact Us'); ?>
+
+                    </div>
+
+                    <a href="<?php the_permalink(); ?>"
+                      class="btn btn-outline-primary rounded-1 px-4">
+                      View Details
+                    </a>
 
                   </div>
 
@@ -432,12 +446,14 @@
 
               </div>
 
-            </article>
+            </div>
+
+          </article>
 
           <?php endwhile; ?>
           <?php else : ?>
 
-            <p class="text-muted">No tours found.</p>
+          <p class="text-muted">No tours found.</p>
 
           <?php endif; ?>
 
