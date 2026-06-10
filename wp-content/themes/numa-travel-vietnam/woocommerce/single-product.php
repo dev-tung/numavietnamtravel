@@ -428,20 +428,25 @@ MODAL GALLERY
       <div class="col-12 col-xl-8">
         <?php
 
-          $wc_product = wc_get_product(get_the_ID());
+        $wc_product = wc_get_product(get_the_ID());
 
-          if (!$wc_product) {
-              return;
-          }
+        if (!$wc_product) {
+            return;
+        }
 
-          $gallery_ids = $wc_product->get_gallery_image_ids();
+        $gallery_ids = $wc_product->get_gallery_image_ids();
 
-          if ($wc_product->get_image_id()) {
-              array_unshift(
-                  $gallery_ids,
-                  $wc_product->get_image_id()
-              );
-          }
+        if ($wc_product->get_image_id()) {
+            array_unshift(
+                $gallery_ids,
+                $wc_product->get_image_id()
+            );
+        }
+
+        /* Fallback nếu không có ảnh */
+        if (empty($gallery_ids)) {
+            $gallery_ids = [0];
+        }
 
         ?>
         <!-- Gallery -->
@@ -511,19 +516,22 @@ MODAL GALLERY
           <!-- Thumbs -->
           <div class="TourGallery__thumbs p-3">
 
-              <?php foreach ($gallery_ids as $index => $image_id) : ?>
+            <?php foreach ($gallery_ids as $index => $image_id) : ?>
 
-                  <img
-                      src="<?php echo esc_url(
-                          wp_get_attachment_image_url(
-                              $image_id,
-                              'medium'
-                          )
-                      ); ?>"
-                      class="TourGallery__thumb <?php echo $index === 0 ? 'active' : ''; ?>"
-                      alt="<?php echo esc_attr(get_the_title()); ?>">
+                <?php
+                $image = $image_id
+                    ? wp_get_attachment_image_url($image_id, 'full')
+                    : 'https://placehold.co/1200x800?text=Tour+Image';
+                ?>
 
-              <?php endforeach; ?>
+                <img src="<?php echo esc_url($image); ?>"
+                    class="TourGallery__image <?php echo $index === 0 ? 'active' : ''; ?>"
+                    alt="<?php echo esc_attr(get_the_title()); ?>"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=Tour+Image';">
+
+            <?php endforeach; ?>
 
           </div>
 
