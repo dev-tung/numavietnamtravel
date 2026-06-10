@@ -407,14 +407,15 @@ RESPONSIVE
                             <?php the_post_thumbnail(
                                 'large',
                                 [
-                                    'class' => 'card-img-top rounded-top',
-                                    'style' => 'height:220px;object-fit:cover;'
+                                    'class'   => 'card-img-top rounded-top',
+                                    'style'   => 'height:220px;object-fit:cover;',
+                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Tour+Image';"
                                 ]
                             ); ?>
 
                         <?php else : ?>
 
-                            <img src="https://via.placeholder.com/800x500"
+                            <img src="https://placehold.co/800x500?text=Tour+Image"
                                 class="card-img-top rounded-top"
                                 alt="<?php the_title_attribute(); ?>">
 
