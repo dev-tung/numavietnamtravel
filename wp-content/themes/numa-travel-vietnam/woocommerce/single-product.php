@@ -436,6 +436,7 @@ MODAL GALLERY
 
         $gallery_ids = $wc_product->get_gallery_image_ids();
 
+        /* Featured image lên đầu gallery */
         if ($wc_product->get_image_id()) {
             array_unshift(
                 $gallery_ids,
@@ -448,92 +449,108 @@ MODAL GALLERY
             $gallery_ids = [0];
         }
 
+        $totalImages = count(array_filter($gallery_ids));
+
         ?>
+
         <!-- Gallery -->
         <div class="border rounded-1 overflow-hidden mb-3 bg-white">
 
-          <!-- Main -->
-          <div class="TourGallery position-relative">
+            <!-- Main -->
+            <div class="TourGallery position-relative">
 
-            <div class="TourGallery__main">
+                <div class="TourGallery__main">
 
-                <?php foreach ($gallery_ids as $index => $image_id) : ?>
+                    <?php foreach ($gallery_ids as $index => $image_id) : ?>
 
-                    <img
-                        src="<?php echo esc_url(
-                            wp_get_attachment_image_url(
+                        <?php
+                        $image = $image_id
+                            ? wp_get_attachment_image_url(
                                 $image_id,
                                 'full'
                             )
-                        ); ?>"
-                        class="TourGallery__image <?php echo $index === 0 ? 'active' : ''; ?>"
-                        alt="<?php echo esc_attr(get_the_title()); ?>">
+                            : 'https://placehold.co/1200x800?text=Tour+Image';
+                        ?>
+
+                        <img
+                            src="<?php echo esc_url($image); ?>"
+                            class="TourGallery__image <?php echo $index === 0 ? 'active' : ''; ?>"
+                            alt="<?php echo esc_attr(get_the_title()); ?>"
+                            loading="lazy"
+                            decoding="async"
+                            onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=Tour+Image';">
+
+                    <?php endforeach; ?>
+
+                </div>
+
+                <!-- Prev -->
+                <button class="TourGallery__nav TourGallery__prev"
+                        type="button">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        fill="currentColor"
+                        viewBox="0 0 16 16">
+
+                        <path fill-rule="evenodd"
+                              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+
+                    </svg>
+
+                </button>
+
+                <!-- Next -->
+                <button class="TourGallery__nav TourGallery__next"
+                        type="button">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        fill="currentColor"
+                        viewBox="0 0 16 16">
+
+                        <path fill-rule="evenodd"
+                              d="M4.646 1.646a.5.5 0 0 0 0 .708L10.293 8l-5.647 5.646a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0"/>
+
+                    </svg>
+
+                </button>
+
+                <button class="btn btn-dark position-absolute bottom-0 end-0 m-3 small rounded-1 px-3 py-2">
+
+                    View all photos (<?php echo $totalImages; ?>)
+
+                </button>
+
+            </div>
+
+            <!-- Thumbnails -->
+            <div class="TourGallery__thumbs p-3">
+
+                <?php foreach ($gallery_ids as $index => $image_id) : ?>
+
+                    <?php
+                    $thumb = $image_id
+                        ? wp_get_attachment_image_url(
+                            $image_id,
+                            'medium'
+                        )
+                        : 'https://placehold.co/300x200?text=Tour';
+                    ?>
+
+                    <img
+                        src="<?php echo esc_url($thumb); ?>"
+                        class="TourGallery__thumb <?php echo $index === 0 ? 'active' : ''; ?>"
+                        alt="<?php echo esc_attr(get_the_title()); ?>"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.onerror=null;this.src='https://placehold.co/300x200?text=Tour';">
 
                 <?php endforeach; ?>
 
             </div>
-
-            <!-- Prev -->
-            <button class="TourGallery__nav TourGallery__prev"
-                    type="button">
-
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="22"
-                   height="22"
-                   fill="currentColor"
-                   viewBox="0 0 16 16">
-
-                <path fill-rule="evenodd"
-                      d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-
-              </svg>
-
-            </button>
-
-            <!-- Next -->
-            <button class="TourGallery__nav TourGallery__next"
-                    type="button">
-
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="22"
-                   height="22"
-                   fill="currentColor"
-                   viewBox="0 0 16 16">
-
-                <path fill-rule="evenodd"
-                      d="M4.646 1.646a.5.5 0 0 0 0 .708L10.293 8l-5.647 5.646a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0"/>
-
-              </svg>
-
-            </button>
-
-            <button class="btn btn-dark position-absolute bottom-0 end-0 m-3 small rounded-1 px-3 py-2">
-              View all photos (<?php echo count($gallery_ids); ?>)
-            </button>
-
-          </div>
-
-          <!-- Thumbs -->
-          <div class="TourGallery__thumbs p-3">
-
-            <?php foreach ($gallery_ids as $index => $image_id) : ?>
-
-                <?php
-                $image = $image_id
-                    ? wp_get_attachment_image_url($image_id, 'full')
-                    : 'https://placehold.co/1200x800?text=Tour+Image';
-                ?>
-
-                <img src="<?php echo esc_url($image); ?>"
-                    class="TourGallery__image <?php echo $index === 0 ? 'active' : ''; ?>"
-                    alt="<?php echo esc_attr(get_the_title()); ?>"
-                    loading="lazy"
-                    decoding="async"
-                    onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=Tour+Image';">
-
-            <?php endforeach; ?>
-
-          </div>
 
         </div>
 
