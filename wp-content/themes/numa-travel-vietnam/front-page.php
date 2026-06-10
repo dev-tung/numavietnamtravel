@@ -402,24 +402,24 @@ RESPONSIVE
 
                     <a href="<?php the_permalink(); ?>">
 
-                        <?php if (has_post_thumbnail()) : ?>
+                        <?php
+                        $image = get_the_post_thumbnail_url(
+                            get_the_ID(),
+                            'large'
+                        );
 
-                            <?php the_post_thumbnail(
-                                'large',
-                                [
-                                    'class'   => 'card-img-top rounded-top',
-                                    'style'   => 'height:220px;object-fit:cover;',
-                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Tour+Image';"
-                                ]
-                            ); ?>
+                        if (!$image) {
+                            $image = 'https://placehold.co/800x500?text=Tour+Image';
+                        }
+                        ?>
 
-                        <?php else : ?>
-
-                            <img src="https://placehold.co/800x500?text=Tour+Image"
-                                class="card-img-top rounded-top"
-                                alt="<?php the_title_attribute(); ?>">
-
-                        <?php endif; ?>
+                        <img src="<?php echo esc_url($image); ?>"
+                            class="card-img-top rounded-top"
+                            alt="<?php the_title_attribute(); ?>"
+                            style="height:220px;object-fit:cover;"
+                            loading="lazy"
+                            decoding="async"
+                            onerror="this.onerror=null;this.src='https://placehold.co/800x500?text=Tour+Image';">
 
                     </a>
 
@@ -593,32 +593,26 @@ RESPONSIVE
 
             <div class="col-6 col-md-4 col-xl-2">
 
-                <a href="<?php echo esc_url(
-                    get_term_link($category)
-                ); ?>"
-                  class="text-decoration-none text-dark">
+                <a href="<?php echo esc_url(get_term_link($category)); ?>"class="text-decoration-none text-dark">
 
                     <div class="destination-card rounded-4 bg-white shadow-sm p-3 text-center h-100">
 
-                        <img src="<?php echo esc_url($image); ?>"
+                        <img src="<?php echo esc_url(
+                            $image ?: 'https://placehold.co/600x400?text=Destination'
+                        ); ?>"
                             class="img-fluid rounded-4 mb-3"
                             alt="<?php echo esc_attr($category->name); ?>"
                             style="height:120px;width:100%;object-fit:cover;"
+                            loading="lazy"
+                            decoding="async"
                             onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Destination';">
 
                         <h6 class="mb-1">
-
-                            <?php echo esc_html(
-                                $category->name
-                            ); ?>
-
+                            <?php echo esc_html($category->name); ?>
                         </h6>
 
                         <small class="text-muted">
-
-                            <?php echo $category->count; ?>
-                            Tours
-
+                            <?php echo $category->count; ?> Tours
                         </small>
 
                     </div>
@@ -677,29 +671,28 @@ RESPONSIVE
 
                 <article class="card border-0 shadow-sm h-100 overflow-hidden">
 
-                    <a href="<?php the_permalink(); ?>">
+                        <a href="<?php the_permalink(); ?>">
 
-                        <?php if (has_post_thumbnail()) : ?>
+                            <?php
+                            $image = get_the_post_thumbnail_url(
+                                get_the_ID(),
+                                'large'
+                            );
 
-                            <?php the_post_thumbnail(
-                                'large',
-                                [
-                                    'class' => 'card-img-top rounded-top',
-                                    'style' => 'height:220px;object-fit:cover;',
-                                    'onerror' => "this.onerror=null;this.src='https://placehold.co/800x500?text=Post+Image';"
-                                ]
-                            ); ?>
+                            if (!$image) {
+                                $image = 'https://placehold.co/800x500?text=Post+Image';
+                            }
+                            ?>
 
-                        <?php else : ?>
-
-                            <img src="https://placehold.co/800x500?text=Post+Image"
+                            <img src="<?php echo esc_url($image); ?>"
                                 class="card-img-top rounded-top"
                                 style="height:220px;object-fit:cover;"
-                                alt="<?php the_title_attribute(); ?>">
+                                alt="<?php the_title_attribute(); ?>"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="this.onerror=null;this.src='https://placehold.co/800x500?text=Post+Image';">
 
-                        <?php endif; ?>
-
-                    </a>
+                        </a>
 
                     <div class="card-body p-4">
 
